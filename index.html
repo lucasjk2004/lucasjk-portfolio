@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Formula SAE Safety Shutdown Circuit – Lucas Kang</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@media print {
+  @page { size: 11in 8.5in landscape; margin: 0; }
+  html, body { width: 11in; height: 8.5in; overflow: hidden; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+}
+
+:root {
+  --navy: #0f1e3c; --red: #c8320a; --gold: #e8a020; --gold-lt: #f5c050;
+  --cream: #f6f4ef; --border: #d4d0c8; --text: #1a1814; --dgray: #4a4642;
+}
+
+html, body {
+  font-family: 'DM Sans', sans-serif;
+  background: white; color: var(--text);
+  width: 1056px; height: 816px; overflow: hidden;
+}
+.page { width: 1056px; height: 816px; display: flex; flex-direction: column; }
+
+/* HEADER */
+header {
+  background: var(--navy); height: 52px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 18px; border-bottom: 3px solid var(--gold);
+}
+.h-left { display: flex; align-items: center; gap: 12px; }
+.badge { background: white; color: var(--navy); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; flex-shrink: 0; }
+.badge em { color: var(--red); font-style: normal; }
+header h1 { color: white; font-size: 16px; font-weight: 600; line-height: 1.15; }
+header h1 small { display: block; font-size: 10px; font-weight: 300; color: #8fa8d0; margin-top: 2px; }
+.h-right { text-align: right; font-size: 9.5px; color: #7a92b8; line-height: 1.7; }
+.h-right strong { color: white; font-size: 10.5px; }
+
+/* BODY */
+.body { flex: 1; display: grid; grid-template-columns: 252px 1fr; overflow: hidden; }
+
+/* LEFT */
+.left-col { background: var(--cream); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+
+/* RIGHT */
+.right-col { display: grid; grid-template-rows: 1fr auto auto; overflow: hidden; }
+
+/* SECTION HEADER */
+.sh { font-size: 8.5px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; padding: 4px 10px; flex-shrink: 0; }
+.sh.red  { background: var(--red);  color: white; }
+.sh.navy { background: var(--navy); color: white; }
+.sh.gold { background: var(--gold); color: var(--navy); }
+.sh.dark { background: #1e2c3a;    color: white; }
+
+/* INTRO */
+.intro-panel { flex: 1; padding: 10px 12px; overflow: hidden; display: flex; flex-direction: column; gap: 7px; }
+.blurb { font-size: 10.5px; line-height: 1.6; color: #2a2a2a; }
+.tag-rows { display: flex; flex-direction: column; gap: 6px; }
+.tr { display: flex; gap: 7px; align-items: flex-start; }
+.tag { font-size: 7.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; flex-shrink: 0; margin-top: 2px; font-family: 'DM Mono', monospace; white-space: nowrap; }
+.tag.nv { background: var(--navy); color: var(--gold-lt); }
+.tag.rd { background: var(--red);  color: white; }
+.tag.gd { background: var(--gold); color: var(--navy); }
+.tag.sl { background: #2c3e50;     color: #a8c0d8; }
+.td { font-size: 10px; line-height: 1.5; color: #222; }
+.td strong { color: var(--navy); }
+
+/* SPECS */
+.specs-panel { border-top: 1px solid var(--border); padding: 8px 12px; flex-shrink: 0; }
+.specs-panel table { width: 100%; border-collapse: collapse; font-size: 9.5px; }
+.specs-panel thead tr { background: var(--navy); }
+.specs-panel thead th { color: white; padding: 4px 6px; text-align: left; font-weight: 600; font-size: 9px; }
+.specs-panel tbody tr:nth-child(odd)  { background: #dce0ea; }
+.specs-panel tbody tr:nth-child(even) { background: var(--cream); }
+.specs-panel td { padding: 3.5px 6px; }
+.specs-panel td:first-child { font-weight: 500; }
+.specs-panel td:last-child  { color: var(--dgray); font-size: 8.5px; }
+.val { color: var(--navy); font-weight: 600; font-family: 'DM Mono', monospace; }
+
+/* IMAGES ROW */
+.imgs-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); overflow: hidden; }
+.img-cell { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+.img-cell:last-child { border-right: none; }
+.img-wrap { flex: 1; overflow: hidden; background: #111827; display: flex; align-items: center; justify-content: center; min-height: 0; }
+
+/* ── IMAGE SLOTS ─────────────────────────────────────────────
+   To add your images, replace each <div class="img-slot">
+   block with:
+   <img src="yourfile.png" style="width:100%;height:100%;object-fit:contain;display:block;">
+   ──────────────────────────────────────────────────────────── */
+.img-slot { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border: 1.5px dashed #2a3248; color: #445; font-size: 10px; text-align: center; padding: 8px; }
+.slot-tag { background: var(--gold); color: var(--navy); font-size: 8px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; font-family: 'DM Mono', monospace; }
+.slot-hint { font-size: 9px; color: #556; line-height: 1.4; }
+.img-cap { background: rgba(15,30,60,0.88); color: #c8d8ee; font-size: 9px; padding: 4px 8px; line-height: 1.4; flex-shrink: 0; border-top: 1.5px solid var(--gold); }
+.img-cap strong { color: var(--gold-lt); }
+
+/* BLOCK DIAGRAM */
+.block-row { border-bottom: 1px solid var(--border); padding: 5px 12px 3px; overflow: hidden; }
+.bdiag { width: 100%; overflow: visible; }
+
+/* BOTTOM ROW */
+.bottom-row { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+.video-panel { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+.results-panel { display: flex; flex-direction: column; background: #f0f2f7; overflow: hidden; }
+
+.vid-inner { flex: 1; display: flex; gap: 10px; padding: 8px 10px; overflow: hidden; }
+.vid-thumb { width: 100px; flex-shrink: 0; background: #161b27; border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border: 1.5px dashed #2a3248; }
+/* Replace vid-thumb with: <img src="thumb.jpg" style="width:100px;height:100%;object-fit:cover;border-radius:3px;flex-shrink:0;"> */
+.play-btn { width: 28px; height: 28px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-btn::after { content: ''; border: 6px solid transparent; border-left: 11px solid white; margin-left: 3px; }
+.vid-note { color: #445; font-size: 9px; text-align: center; line-height: 1.4; }
+.timestamps { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.ts-row { display: flex; gap: 6px; align-items: flex-start; }
+.ts { background: var(--navy); color: var(--gold-lt); font-size: 8px; font-weight: 500; font-family: 'DM Mono', monospace; padding: 1.5px 4px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.ts-text { font-size: 10px; color: #99aabb; line-height: 1.4; }
+
+.res-inner { flex: 1; padding: 8px 10px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; }
+.sub { font-size: 8.5px; font-weight: 700; letter-spacing: 0.9px; text-transform: uppercase; color: var(--navy); }
+.pills { display: flex; flex-wrap: wrap; gap: 4px; }
+.pill { font-size: 9px; font-weight: 600; padding: 2px 8px; border-radius: 9px; font-family: 'DM Mono', monospace; }
+.pill.rd { background: var(--red);  color: white; }
+.pill.nv { background: var(--navy); color: white; }
+.pill.gd { background: var(--gold); color: var(--navy); }
+.ack  { font-size: 10px; color: #333; line-height: 1.6; }
+.tools { font-size: 10px; color: #333; line-height: 1.75; }
+.tools strong { color: var(--navy); }
+
+/* FOOTER */
+footer { background: var(--navy); color: #6a82a8; font-size: 9.5px; padding: 5px 18px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-top: 2px solid var(--gold); }
+footer strong { color: white; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HEADER ═══
+     Edit: title, name, email, dates -->
+<header>
+  <div class="h-left">
+    <div class="badge"><em>UCI</em> Samueli</div>
+    <h1>Formula SAE Safety Shutdown Circuit
+      <small>Lucas Kang &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; UCI Formula SAE Electric Vehicle</small>
+    </h1>
+  </div>
+  <div class="h-right">
+    <strong>University of California, Irvine</strong><br>
+    B.S. Electrical Engineering &amp; B.A. Music<br>
+    Sep 2024 – Jun 2025
+  </div>
+</header>
+
+<div class="body">
+
+  <!-- ══════════════════════════════════════
+       LEFT COLUMN
+       ══════════════════════════════════════ -->
+  <div class="left-col">
+
+    <div class="sh red">Introduction</div>
+    <div class="intro-panel">
+
+      <!-- ── Edit blurb ── -->
+      <p class="blurb">Per FSAE EV.7, the Shutdown Circuit is a series loop where any of eight fault sources can open the loop and kill the tractive system. This project covers two of those segments — the <strong>Latchboard</strong> and <strong>BSPD circuit</strong> — designed and validated from scratch.</p>
+
+      <!-- ── Edit each tag-row ── -->
+      <div class="tag-rows">
+        <div class="tr">
+          <span class="tag nv">Form</span>
+          <div class="td">Low-voltage self-latching relay PCB implementing three independent fault paths (BMS, IMD, BSPD) in the FSAE Shutdown Circuit series loop.</div>
+        </div>
+        <div class="tr">
+          <span class="tag nv">Function</span>
+          <div class="td">Any fault opens and latches the corresponding relay stage. Car stays disabled until <strong>manual reset at the vehicle</strong> — driver cannot re-enable from cockpit (EV.7.2.3). BSPD monitors simultaneous brake + throttle, flagging sensor failure or stuck pedal.</div>
+        </div>
+        <div class="tr">
+          <span class="tag sl">Method</span>
+          <div class="td">Three relay stages in series with the Shutdown loop. Each uses a self-holding NC contact. Comparator threshold tuning on BSPD line per EV.7.7.</div>
+        </div>
+        <div class="tr">
+          <span class="tag gd">Benefit</span>
+          <div class="td">Isolates each fault source to a dedicated stage — no single-point failure. <strong>&lt;50 ms</strong> response. Manual-reset requires no MCU logic.</div>
+        </div>
+        <div class="tr">
+          <span class="tag rd">Result</span>
+          <div class="td"><strong>99% detection accuracy</strong> across 100+ bench tests. Passed FSAE electrical inspection. Integrated into competition vehicle HV safety chain.</div>
+        </div>
+      </div>
+
+    </div><!-- /intro-panel -->
+
+    <!-- ── Edit spec rows ── -->
+    <div class="sh navy">Design Specifications</div>
+    <div class="specs-panel">
+      <table>
+        <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Shutdown response</td><td><span class="val">&lt;50 ms</span></td><td>Fault signal → HV open</td></tr>
+          <tr><td>Fault detection rate</td><td><span class="val">99%</span></td><td>100+ bench tests</td></tr>
+          <tr><td>Operating voltage</td><td><span class="val">12V DC</span></td><td>Relay coil supply</td></tr>
+          <tr><td>Relay contact rating</td><td><span class="val">5A / 30V DC</span></td><td>G6B-2214P-US BC12</td></tr>
+          <tr><td>Fault stages</td><td><span class="val">3 independent</span></td><td>BSPD · IMD · BMS</td></tr>
+          <tr><td>Latch behavior</td><td><span class="val">NC self-hold</span></td><td>Manual reset only</td></tr>
+          <tr><td>BSPD threshold</td><td><span class="val">&lt;0V and &gt;4.5V</span></td><td>FSAE EV.7.7</td></tr>
+          <tr><td>PCB</td><td><span class="val">2-layer FR4</span></td><td>KiCad, JLCPCB mfg</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /left-col -->
+
+
+  <!-- ══════════════════════════════════════
+       RIGHT COLUMN
+       ══════════════════════════════════════ -->
+  <div class="right-col">
+
+    <!-- ── THREE IMAGE SLOTS ── -->
+    <div class="imgs-row">
+
+      <!-- IMAGE 1: PCB render/photo
+           Replace img-slot with:
+           <img src="pcb.jpg" style="width:100%;height:100%;object-fit:contain;"> -->
+      <div class="img-cell">
+        <div class="sh red">PCB 3D Render</div>
+        <div class="img-wrap">
+          <div class="img-slot">
+            <div class="slot-tag">📷 Insert image</div>
+            <div class="slot-hint">KiCad 3D render<br>or board photo</div>
+          </div>
+        </div>
+        <div class="img-cap">
+          <!-- ── Edit caption ── -->
+          <strong>Fig. 1</strong> Latchboard PCB — three self-latching relay stages (BSPD, IMD, BMS), red manual reset buttons, G6B relays 5A/30V.
+        </div>
+      </div>
+
+      <!-- IMAGE 2: Relay schematic
+           Replace img-slot with:
+           <img src="relay-sch.png" style="width:100%;height:100%;object-fit:contain;"> -->
+      <div class="img-cell">
+        <div class="sh navy">Relay Schematic</div>
+        <div class="img-wrap">
+          <div class="img-slot">
+            <div class="slot-tag">📷 Insert image</div>
+            <div class="slot-hint">KiCad relay schematic<br>export (latchboard stages)</div>
+          </div>
+        </div>
+        <div class="img-cap">
+          <!-- ── Edit caption ── -->
+          <strong>Fig. 2</strong> Self-latching DPDT topology — SW1 reset path, DSPD_FAULT and BSPD_FAULT signals. NC contact holds relay open post-trip.
+        </div>
+      </div>
+
+      <!-- IMAGE 3: BSPD comparator
+           Replace img-slot with:
+           <img src="comparator.png" style="width:100%;height:100%;object-fit:contain;"> -->
+      <div class="img-cell">
+        <div class="sh navy">BSPD Comparator Logic</div>
+        <div class="img-wrap">
+          <div class="img-slot">
+            <div class="slot-tag">📷 Insert image</div>
+            <div class="slot-hint">Stage 3 comparator schematic<br>brake + pedal sensor inputs</div>
+          </div>
+        </div>
+        <div class="img-cap">
+          <!-- ── Edit caption ── -->
+          <strong>Fig. 3</strong> BSPD comparator — brake and pedal sensors; simultaneous activation asserts BSPD_FAULT per EV.7.7.
+        </div>
+      </div>
+
+    </div><!-- /imgs-row -->
+
+
+    <!-- ── BLOCK DIAGRAM ── -->
+    <div class="block-row">
+      <div class="sh gold">System Block Diagram</div>
+      <svg class="bdiag" viewBox="0 0 790 118" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',sans-serif; margin-top:3px;">
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#0f1e3c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#c8320a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- Debug LED banner -->
+        <rect x="342" y="2" width="220" height="13" rx="2" fill="#faf5e0" stroke="#e8a020" stroke-width="0.5"/>
+        <text x="452" y="11" text-anchor="middle" font-size="7.5" fill="#7a6010">Debug LEDs confirm relay state per stage</text>
+
+        <!-- Inputs -->
+        <rect x="4"  y="22" width="88" height="22" rx="3" fill="#eef1f8" stroke="#0f1e3c" stroke-width="0.7"/>
+        <text x="48" y="32" text-anchor="middle" font-size="8.5" font-weight="600" fill="#0f1e3c">BSPD Signal</text>
+        <text x="48" y="41" text-anchor="middle" font-size="7"   fill="#555">Brake + Throttle</text>
+
+        <rect x="4"  y="52" width="88" height="22" rx="3" fill="#eef1f8" stroke="#0f1e3c" stroke-width="0.7"/>
+        <text x="48" y="62" text-anchor="middle" font-size="8.5" font-weight="600" fill="#0f1e3c">IMD Fault</text>
+        <text x="48" y="71" text-anchor="middle" font-size="7"   fill="#555">Insulation monitor</text>
+
+        <rect x="4"  y="82" width="88" height="22" rx="3" fill="#eef1f8" stroke="#0f1e3c" stroke-width="0.7"/>
+        <text x="48" y="92" text-anchor="middle" font-size="8.5" font-weight="600" fill="#0f1e3c">BMS Fault</text>
+        <text x="48" y="101" text-anchor="middle" font-size="7"  fill="#555">Battery mgmt</text>
+
+        <!-- Arrows to comparator -->
+        <line x1="92"  y1="33"  x2="136" y2="48"  stroke="#0f1e3c" stroke-width="0.7" marker-end="url(#a)"/>
+        <line x1="92"  y1="63"  x2="136" y2="60"  stroke="#0f1e3c" stroke-width="0.7" marker-end="url(#a)"/>
+        <line x1="92"  y1="93"  x2="136" y2="73"  stroke="#0f1e3c" stroke-width="0.7" marker-end="url(#a)"/>
+
+        <!-- Comparator -->
+        <rect x="138" y="40" width="96" height="40" rx="3" fill="#1a2f5a" stroke="#0f1e3c" stroke-width="0.8"/>
+        <text x="186" y="55"  text-anchor="middle" font-size="8.5" font-weight="700" fill="#e8a020">Comparator</text>
+        <text x="186" y="66"  text-anchor="middle" font-size="7"   fill="#b0c0e0">Tuned per EV.7.7</text>
+        <text x="186" y="75"  text-anchor="middle" font-size="7"   fill="#c8320a">&lt;50 ms</text>
+
+        <line x1="234" y1="60" x2="272" y2="60" stroke="#0f1e3c" stroke-width="0.8" marker-end="url(#a)"/>
+        <text x="253" y="55" text-anchor="middle" font-size="7" fill="#555">Fault</text>
+
+        <!-- Latchboard -->
+        <rect x="274" y="17" width="192" height="90" rx="4" fill="#fff8f0" stroke="#c8320a" stroke-width="1"/>
+        <text x="370" y="31" text-anchor="middle" font-size="9.5" font-weight="700" fill="#c8320a">Latchboard PCB</text>
+
+        <rect x="286" y="38" width="46" height="26" rx="3" fill="#c8320a" stroke="#991100" stroke-width="0.5"/>
+        <text x="309" y="50" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">Stage 1</text>
+        <text x="309" y="60" text-anchor="middle" font-size="7"  fill="#ffc">BSPD</text>
+        <text x="309" y="78" text-anchor="middle" font-size="11" fill="#c8320a">⊣</text>
+
+        <rect x="343" y="38" width="46" height="26" rx="3" fill="#2266cc" stroke="#1044aa" stroke-width="0.5"/>
+        <text x="366" y="50" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">Stage 2</text>
+        <text x="366" y="60" text-anchor="middle" font-size="7"  fill="#cce">IMD</text>
+        <text x="366" y="78" text-anchor="middle" font-size="11" fill="#2266cc">⊣</text>
+
+        <rect x="400" y="38" width="46" height="26" rx="3" fill="#1a7040" stroke="#0d4428" stroke-width="0.5"/>
+        <text x="423" y="50" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">Stage 3</text>
+        <text x="423" y="60" text-anchor="middle" font-size="7"  fill="#cec">BMS</text>
+        <text x="423" y="78" text-anchor="middle" font-size="11" fill="#1a7040">⊣</text>
+
+        <text x="370" y="98" text-anchor="middle" font-size="7" fill="#884422" font-style="italic">Self-latching · Manual reset required</text>
+
+        <!-- TRIP -->
+        <line x1="466" y1="60" x2="502" y2="60" stroke="#c8320a" stroke-width="1.4" marker-end="url(#ar)"/>
+        <text x="484" y="55" text-anchor="middle" font-size="7.5" fill="#c8320a" font-weight="700">TRIP</text>
+
+        <!-- HV Contactor -->
+        <rect x="504" y="38" width="110" height="46" rx="3" fill="#1a1a2e" stroke="#333" stroke-width="0.9"/>
+        <text x="559" y="56"  text-anchor="middle" font-size="9" font-weight="700" fill="#e8a020">HV Contactor</text>
+        <text x="559" y="67"  text-anchor="middle" font-size="7" fill="#99aac0">Opens LV relay, HV bus</text>
+        <text x="559" y="78"  text-anchor="middle" font-size="7" fill="#c8320a">&lt;50 ms total</text>
+
+        <line x1="614" y1="60" x2="648" y2="60" stroke="#c8320a" stroke-width="1.4" marker-end="url(#ar)"/>
+
+        <!-- HV OFF -->
+        <rect x="650" y="40" width="50" height="40" rx="3" fill="#c8320a" stroke="#991100" stroke-width="0.8"/>
+        <text x="675" y="57"  text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">HV</text>
+        <text x="675" y="70"  text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">OFF</text>
+
+        <!-- Manual reset loop -->
+        <path d="M466 108 Q466 115 370 115 Q278 115 278 108" fill="none" stroke="#aaa" stroke-width="0.7" stroke-dasharray="3 2" marker-end="url(#a)"/>
+        <text x="370" y="113" text-anchor="middle" font-size="7" fill="#888">Manual reset per stage</text>
+
+      </svg>
+    </div><!-- /block-row -->
+
+
+    <!-- ── BOTTOM: VIDEO + RESULTS ── -->
+    <div class="bottom-row">
+
+      <!-- VIDEO
+           Replace vid-thumb with:
+           <img src="thumb.jpg" style="width:100px;height:100%;object-fit:cover;border-radius:3px;flex-shrink:0;"> -->
+      <div class="video-panel">
+        <div class="sh red">Video Demonstration</div>
+        <div class="vid-inner">
+          <div class="vid-thumb">
+            <div class="play-btn"></div>
+            <div class="vid-note">Insert video<br>or QR code</div>
+          </div>
+          <!-- ── Edit timestamps ── -->
+          <div class="timestamps">
+            <div class="ts-row"><span class="ts">0:00</span><span class="ts-text">Board powered, all debug LEDs green — nominal state</span></div>
+            <div class="ts-row"><span class="ts">0:15</span><span class="ts-text">BSPD fault simulated (brake + throttle) → Stage 1 trips, contactor opens</span></div>
+            <div class="ts-row"><span class="ts">0:35</span><span class="ts-text">Fault cleared — board stays latched; press reset to re-engage (EV.7.2.3)</span></div>
+            <div class="ts-row"><span class="ts">0:55</span><span class="ts-text">Oscilloscope: fault edge → contactor open, &lt;50 ms measured</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS & ACK -->
+      <div class="results-panel">
+        <div class="sh dark">Results &amp; Acknowledgements</div>
+        <div class="res-inner">
+
+          <!-- ── Edit pills ── -->
+          <div>
+            <div class="sub">Validated Results</div>
+            <div class="pills" style="margin-top:4px;">
+              <span class="pill rd">&lt;50 ms shutdown</span>
+              <span class="pill nv">100+ bench tests</span>
+              <span class="pill gd">99% fault detection</span>
+              <span class="pill nv">FSAE inspection passed</span>
+              <span class="pill rd">3-stage isolation</span>
+              <span class="pill nv">HV chain integrated</span>
+            </div>
+          </div>
+
+          <!-- ── Edit ack text ── -->
+          <p class="ack">Designed, fabricated, and validated by Lucas Kang as part of UCI Formula SAE's electrical team. PCB manufactured via JLCPCB. Reviewed against FSAE 2025 rules EV.7.1–EV.7.9.</p>
+
+          <!-- ── Edit tools ── -->
+          <div>
+            <div class="sub">Tools &amp; Components</div>
+            <div class="tools" style="margin-top:3px;">
+              <strong>EDA:</strong> KiCad &nbsp;·&nbsp; <strong>Sim:</strong> LTspice &nbsp;·&nbsp;
+              <strong>ICs:</strong> G6B-2214P-US relay, LM393 comparator<br>
+              <strong>Test:</strong> Rigol DS1054Z oscilloscope &nbsp;·&nbsp; <strong>Mfg:</strong> JLCPCB 2-layer FR4
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /bottom-row -->
+  </div><!-- /right-col -->
+</div><!-- /body -->
+
+<!-- ═══ FOOTER ═══
+     Edit: GitHub handle -->
+<footer>
+  <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; (650) 666-9660 &nbsp;·&nbsp; github.com/[yourhandle]</div>
+  <div>UCI Formula SAE Electric Vehicle &nbsp;·&nbsp; Samueli School of Engineering &nbsp;·&nbsp; Sep 2024 – Jun 2025</div>
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>
