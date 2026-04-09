@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1200 °C Tube Furnace · Lucas Kang</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@media print {
+  @page { size: 8.5in 11in portrait; margin: 0; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+}
+
+:root {
+  --navy:    #0f1e3c;
+  --red:     #c8320a;
+  --gold:    #e8a020;
+  --gold-lt: #f5c050;
+  --teal:    #0e6a6a;
+  --teal-lt: #1a9a9a;
+  --cream:   #f6f4ef;
+  --border:  #d4d0c8;
+  --text:    #1a1814;
+  --dgray:   #4a4642;
+  --orange:  #d4580a;
+}
+
+body { font-family: 'DM Sans', sans-serif; background: #ccc; color: var(--text); margin: 0; }
+
+.page { width: 816px; height: 1056px; background: white; margin: 0 auto 32px; display: flex; flex-direction: column; overflow: hidden; }
+
+header { background: var(--navy); flex-shrink: 0; padding: 13px 22px 11px; border-bottom: 3px solid var(--teal-lt); }
+.h-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.h-left { display: flex; align-items: center; gap: 14px; }
+.badge { background: white; color: var(--navy); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 4px; flex-shrink: 0; }
+.badge em { color: var(--teal); font-style: normal; }
+header h1 { color: white; font-size: 19px; font-weight: 600; line-height: 1.15; }
+header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #88b8c8; margin-top: 3px; }
+.h-right { text-align: right; font-size: 10px; color: #6a9ab8; line-height: 1.75; flex-shrink: 0; }
+.h-right strong { color: white; font-size: 11px; }
+.pg-label { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #4a7080; margin-top: 7px; padding-top: 5px; border-top: 1px solid #1e3858; }
+
+.sh { font-size: 9px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 5px 12px; flex-shrink: 0; }
+.sh.teal   { background: var(--teal);   color: white; }
+.sh.navy   { background: var(--navy);   color: white; }
+.sh.gold   { background: var(--gold);   color: var(--navy); }
+.sh.dark   { background: #1e2c3a;       color: white; }
+.sh.orange { background: var(--orange); color: white; }
+
+.section-pad { padding: 13px 16px; }
+.tag { font-size: 8.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; font-family: 'DM Mono', monospace; white-space: nowrap; vertical-align: middle; display: inline-block; margin-right: 5px; }
+.tag.nv { background: var(--navy);   color: var(--gold-lt); }
+.tag.tl { background: var(--teal);   color: white; }
+.tag.rd { background: var(--red);    color: white; }
+.tag.or { background: var(--orange); color: white; }
+.tag.sl { background: #2c3e50;       color: #a8c0d8; }
+.td { font-size: 12px; line-height: 1.65; color: #1a1a1a; margin-bottom: 10px; }
+.td:last-child { margin-bottom: 0; }
+.td strong { color: var(--navy); }
+
+.img-cell { display: flex; flex-direction: column; }
+.img-wrap { flex: 1; background: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 0; }
+.img-cap { background: rgba(14,106,106,0.88); color: #d0eee8; font-size: 9px; padding: 0 10px; line-height: 22px; flex-shrink: 0; border-top: 1.5px solid var(--teal-lt); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.img-cap strong { color: #a0eee0; }
+.img-slot { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #888; font-size: 9px; text-align: center; padding: 10px; border: 1.5px dashed #c0bdb5; }
+.slot-tag { background: var(--teal); color: white; font-size: 8px; font-weight: 700; padding: 2px 7px; border-radius: 2px; font-family: 'DM Mono', monospace; }
+
+.photo-area { display: flex; flex-direction: column; flex: 1; min-height: 0; border-top: 1px solid var(--border); }
+.photo-hero { display: flex; flex-shrink: 0; height: calc(56% - 32px); border-bottom: 1px solid var(--border); }
+.photo-hero .img-cell { flex: 1; border-right: 1px solid var(--border); display: flex; flex-direction: column; min-height: 0; }
+.photo-hero .img-cell:last-child { border-right: none; }
+.photo-hero .img-wrap { flex: 1; min-height: 0; overflow: hidden; }
+.photo-hero .img-cap { flex-shrink: 0; height: 22px; display: flex; align-items: center; }
+.photo-gap { height: 8px; background: #e0ddd6; flex-shrink: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.photo-trio { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; }
+.photo-trio .img-cell { border-right: 1px solid var(--border); display: flex; flex-direction: column; min-height: 0; }
+.photo-trio .img-cell:last-child { border-right: none; }
+.photo-trio .img-wrap { flex: 1; min-height: 0; overflow: hidden; }
+.photo-trio .img-cap { flex-shrink: 0; height: 22px; display: flex; align-items: center; }
+
+.diagram-full { display: flex; flex-direction: column; flex-shrink: 0; height: 340px; border-top: 1px solid var(--border); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; border-top: 1px solid var(--border); }
+.col-l { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+.col-r { display: flex; flex-direction: column; background: #f0f4f2; overflow: hidden; }
+
+.specs-wrap { padding: 0 14px 8px; flex-shrink: 0; }
+.specs-wrap table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.specs-wrap thead tr { background: var(--navy); }
+.specs-wrap thead th { color: white; padding: 5px 8px; text-align: left; font-weight: 600; font-size: 10.5px; }
+.specs-wrap tbody tr:nth-child(odd)  { background: #dce0ea; }
+.specs-wrap tbody tr:nth-child(even) { background: var(--cream); }
+.specs-wrap td { padding: 4px 8px; }
+.specs-wrap td:first-child { font-weight: 500; }
+.specs-wrap td:last-child  { color: var(--dgray); font-size: 10px; }
+.val { color: var(--navy); font-weight: 600; font-family: 'DM Mono', monospace; }
+
+.bul-list { list-style: none; padding: 0; margin: 0; flex: 1; }
+.bul-list li { font-size: 11px; line-height: 1.6; padding: 4px 14px 4px 20px; position: relative; border-bottom: 1px solid #e8e4dc; }
+.bul-list li:last-child { border-bottom: none; }
+.bul-list li::before { content: '▸'; position: absolute; left: 8px; color: var(--teal); font-size: 9px; top: 7px; }
+.bul-list li strong { color: var(--navy); }
+
+.res-inner { padding: 12px 14px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+.sub { font-size: 8.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 2px; }
+.pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.pill { font-size: 9.5px; font-weight: 600; padding: 3px 9px; border-radius: 10px; font-family: 'DM Mono', monospace; }
+.pill.tl { background: var(--teal);   color: white; }
+.pill.nv { background: var(--navy);   color: white; }
+.pill.gd { background: var(--gold);   color: var(--navy); }
+.pill.or { background: var(--orange); color: white; }
+.tools { font-size: 10.5px; color: #333; line-height: 1.8; }
+.tools strong { color: var(--navy); }
+.ack { font-size: 10.5px; color: #333; line-height: 1.65; }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; flex-shrink: 0; }
+
+footer { background: var(--navy); color: #6a9ab8; font-size: 10px; padding: 5px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-top: 2px solid var(--teal-lt); gap: 12px; }
+footer strong { color: white; }
+footer .f-left { display: flex; flex-direction: column; gap: 1px; }
+footer .f-right { text-align: right; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <header>
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em>UCI</em> Engineering</div>
+        <h1>1200 °C Tube Furnace for Semiconductor Oxidation
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; Hacker Fab / UCI Student-Led Semiconductor Lab</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2024 – Jun 2025
+      </div>
+    </div>
+    <div class="pg-label">Page 1 of 2 &nbsp;·&nbsp; Introduction &nbsp;·&nbsp; Hardware Gallery</div>
+  </header>
+
+  <div class="sh teal">Introduction</div>
+  <div class="section-pad">
+    <div class="td">
+      <span class="tag nv">Objective</span>Commercial tube furnaces capable of 1200 °C silicon oxidation cost upward of $3,000 and are unavailable in most student lab settings. As part of the UCI Hacker Fab initiative, I co-built a fully programmable, low-cost alumina-tube furnace enabling student-accessible semiconductor fabrication from scratch.
+    </div>
+    <div class="td">
+      <span class="tag sl">Contribution</span>Designed the <strong>PID temperature control PCB</strong> around an ATmega8A MCU with K-type thermocouple feedback, driving a high-voltage resistive heating element through a solid-state relay. Implemented HV isolation with a high-current fuse and alumina ceramic insulation for safe operation.
+    </div>
+    <div class="td">
+      <span class="tag rd">Outcome</span>Achieved <strong>ramp rates up to 20 °C/min</strong> and sustained <strong>±2 °C accuracy at 1200 °C</strong>. Verified successful silicon wafer thermal oxidation via microscope inspection of oxide film. Total system cost: <strong>under $500</strong> versus $3,000+ commercial alternatives.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sh gold">Hardware Gallery</div>
+  <div class="photo-area">
+
+    <div class="photo-hero">
+      <!-- Fig. 1: CAD model — replace img-slot with your image -->
+      <div class="img-cell" style="flex:1.15;">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace_cad.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_cad.png</div>
+            CAD model of furnace
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 1</strong>&nbsp; CAD model — clamshell alumina-tube furnace with ceramic end-caps.</div>
+      </div>
+
+      <!-- Fig. 2: Glowing tube — replace img-slot with your image -->
+      <div class="img-cell" style="flex:1;">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace_glowing.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_glowing.png</div>
+            Tube at operating temp
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 2</strong>&nbsp; Tube at 1200 °C — silicon wafer sample loaded inside the alumina tube.</div>
+      </div>
+    </div>
+
+    <div class="photo-gap"></div>
+
+    <div class="photo-trio">
+      <!-- Fig. 3: Build photo -->
+      <div class="img-cell">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace_build.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_build.png</div>
+            Build / team photo
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 3</strong>&nbsp; Build — team wiring PID control PCB and SSR assembly.</div>
+      </div>
+
+      <!-- Fig. 4: Microscope oxide film -->
+      <div class="img-cell">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace_oxide.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_oxide.png</div>
+            Microscope SiO₂ film
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 4</strong>&nbsp; Microscope — thermally grown SiO₂ film on silicon wafer.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">Hacker Fab / UCI Student-Led Semiconductor Lab<br>Samueli School of Engineering &nbsp;·&nbsp; Sep 2024 – Jun 2025</div>
+  </footer>
+</div><!-- /page 1 -->
+
+
+<!-- PAGE 2 -->
+<div class="page">
+  <header>
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em>UCI</em> Engineering</div>
+        <h1>1200 °C Tube Furnace for Semiconductor Oxidation
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; Hacker Fab / UCI Student-Led Semiconductor Lab</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2024 – Jun 2025
+      </div>
+    </div>
+    <div class="pg-label">Page 2 of 2 &nbsp;·&nbsp; System Block Diagram &nbsp;·&nbsp; Design Specifications &nbsp;·&nbsp; Results</div>
+  </header>
+
+  <div class="sh orange">System Block Diagram</div>
+  <div class="diagram-full">
+    <div class="img-wrap" style="flex:1; background:#fff;">
+      <!-- Replace img-slot with: <img src="furnace_diagram.png" style="width:100%;height:100%;object-fit:contain;display:block;"> -->
+      <img src="furnace_diagram.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="img-slot" style="display:none;">
+        <div class="slot-tag">furnace_diagram.png</div>
+        System block diagram
+      </div>
+    </div>
+    <div class="img-cap">
+      <strong>Fig. 5</strong>&nbsp; PID control loop — Variac adjusts input voltage; HV fuse protects the line; SSR switches AC to the heating element; K-type thermocouple feeds back to ATmega8A MCU; LCD displays setpoint and measured temperature.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="two-col">
+
+    <div class="col-l">
+      <div class="sh navy">Design Specifications</div>
+      <div class="specs-wrap" style="padding-top:8px;">
+        <table>
+          <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Max temperature</td><td><span class="val">1200 °C</span></td><td>Alumina tube rated</td></tr>
+            <tr><td>Temp accuracy</td><td><span class="val">±2 °C</span></td><td>K-type thermocouple</td></tr>
+            <tr><td>Ramp rate</td><td><span class="val">20 °C/min</span></td><td>PID controlled</td></tr>
+            <tr><td>MCU</td><td><span class="val">ATmega8A</span></td><td>C++ firmware, PID loop</td></tr>
+            <tr><td>HV isolation</td><td><span class="val">SSR + fuse</span></td><td>Alumina ceramic insulation</td></tr>
+            <tr><td>Total cost</td><td><span class="val">&lt;$500</span></td><td>vs. $3,000+ commercial</td></tr>
+            <tr><td>Tube material</td><td><span class="val">Alumina</span></td><td>Inert to O₂ at 1200 °C</td></tr>
+            <tr><td>Control firmware</td><td><span class="val">C++ / AVR</span></td><td>ATmega8A, custom PID</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr class="divider" style="margin-top:4px;">
+
+      <div class="sh teal">Engineering Contributions</div>
+      <ul class="bul-list">
+        <li>Built a low-cost, programmable alumina-tube furnace for semiconductor oxidation, enabling <strong>student-accessible fabrication</strong> at UCI Hacker Fab</li>
+        <li>Designed <strong>PID temperature control PCB</strong> using an ATmega8A MCU with thermocouple feedback driving a HV heating element</li>
+        <li>Achieved ramp rates up to <strong>20 °C/min</strong> and maintained <strong>±2 °C accuracy</strong> up to 1200 °C</li>
+        <li>Implemented HV isolation using <strong>solid-state relay</strong>, high-current fuse, and alumina ceramic insulation</li>
+        <li>Delivered complete system under <strong>$500</strong> vs. $3,000+ commercial alternatives; verified silicon wafer oxidation via microscope</li>
+        <li>Designed and laid out custom PCB in <strong>KiCad</strong>; validated control loop behavior in <strong>LTspice</strong> prior to hardware build</li>
+      </ul>
+    </div>
+
+    <div class="col-r">
+      <div class="sh dark">Results &amp; Acknowledgements</div>
+      <div class="res-inner">
+
+        <div>
+          <div class="sub">Validated Results</div>
+          <div class="pills" style="margin-top:5px;">
+            <span class="pill nv">±2 °C at 1200 °C</span>
+            <span class="pill tl">20 °C/min ramp</span>
+            <span class="pill or">SiO₂ film verified</span>
+            <span class="pill nv">HV SSR isolation</span>
+            <span class="pill gd">&lt;$500 total cost</span>
+            <span class="pill tl">Wet/dry oxidation</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="sub">Tools &amp; Components</div>
+          <div class="tools" style="margin-top:4px;">
+            <strong>MCU:</strong> ATmega8A (C++ firmware, PID loop)<br>
+            <strong>PCB design:</strong> KiCad &nbsp;·&nbsp; <strong>Simulation:</strong> LTspice<br>
+            <strong>HV switch:</strong> Solid-state relay (SSR) + high-current fuse<br>
+            <strong>Sensor:</strong> K-type thermocouple &nbsp;·&nbsp; <strong>Tube:</strong> Alumina ceramic<br>
+            <strong>Voltage adj.:</strong> Variac &nbsp;·&nbsp; <strong>Display:</strong> LCD (setpoint + measured)
+          </div>
+        </div>
+
+        <div>
+          <div class="sub">Acknowledgements</div>
+          <p class="ack">Built as part of the UCI Hacker Fab student-led semiconductor lab initiative. Hardware design, firmware, and PCB layout by Lucas Kang in collaboration with Hacker Fab teammates, Sep 2024 – Jun 2025.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">Hacker Fab / UCI Student-Led Semiconductor Lab<br>Samueli School of Engineering &nbsp;·&nbsp; Sep 2024 – Jun 2025</div>
+  </footer>
+</div><!-- /page 2 -->
+
+</body>
+</html>

@@ -387,92 +387,12 @@ footer {
 <div class="projects-list">
 
   <!-- ══════════════════════════════════════════════
-       PROJECT 1 — FSAE SHUTDOWN CIRCUIT
-       ══════════════════════════════════════════════ -->
-  <div class="project" id="fsae" data-tags="pcb embedded competition">
-
-    <div class="proj-sidebar">
-      <div class="proj-number">01 / 04</div>
-      <div class="proj-title">Safety Shutdown Circuit</div>
-      <div class="proj-org">UCI Formula SAE</div>
-      <div class="proj-date">Sep 2024 – Jun 2025</div>
-      <div class="proj-tag-list">
-        <span class="proj-tag">KiCad</span>
-        <span class="proj-tag">LTspice</span>
-        <span class="proj-tag">Relay Logic</span>
-        <span class="proj-tag">FSAE EV.7</span>
-        <span class="proj-tag">JLCPCB</span>
-      </div>
-      <div class="proj-links">
-        <a class="proj-link" href="fsae/index.html">Full poster (2 pages)</a>
-      </div>
-    </div>
-
-    <div class="proj-content">
-
-      <div>
-        <div class="proj-section-label">Overview</div>
-        <p class="proj-summary">
-          The FSAE EV.7 Shutdown Circuit is a <strong>series interlock loop</strong> — any one of eight independent fault sources can open the loop and kill the tractive system. This project covers two of those segments: the <strong>Latchboard PCB</strong> and the <strong>BSPD comparator circuit</strong>, both designed from scratch.
-        </p>
-        <p class="proj-summary" style="margin-top:12px;">
-          The latchboard implements three independent self-latching relay stages (BMS, IMD, BSPD). Once any stage trips, the relay <strong>latches open regardless of driver input</strong> and requires a person to physically reset it at the vehicle — satisfying EV.7.2.3. The BSPD comparator detects simultaneous hard brake and throttle, flagging sensor failure or stuck pedal per EV.7.7.
-        </p>
-      </div>
-
-      <div>
-        <div class="proj-section-label">Results</div>
-        <div class="result-row">
-          <span class="result-pill red">&lt;20 ms shutdown</span>
-          <span class="result-pill gold">100% fault detection</span>
-          <span class="result-pill blue">50+ bench tests</span>
-          <span class="result-pill gold">FSAE inspection passed</span>
-          <span class="result-pill red">3-stage isolation</span>
-          <span class="result-pill blue">HV chain integrated</span>
-        </div>
-      </div>
-
-      <div>
-        <div class="proj-section-label">Key Specifications</div>
-        <div class="specs-mini">
-          <div class="spec-row"><span class="spec-key">Shutdown response</span><span class="spec-val">&lt;20 ms</span></div>
-          <div class="spec-row"><span class="spec-key">Operating voltage</span><span class="spec-val">12V DC</span></div>
-          <div class="spec-row"><span class="spec-key">Relay contact rating</span><span class="spec-val">5A / 125VDC</span></div>
-          <div class="spec-row"><span class="spec-key">Relay part</span><span class="spec-val">G6B-2214P-US BC12</span></div>
-          <div class="spec-row"><span class="spec-key">Fault stages</span><span class="spec-val">3 independent</span></div>
-          <div class="spec-row"><span class="spec-key">Latch behavior</span><span class="spec-val">NO self-hold</span></div>
-          <div class="spec-row"><span class="spec-key">BSPD threshold</span><span class="spec-val">&lt;0V and &gt;4.5V</span></div>
-          <div class="spec-row"><span class="spec-key">PCB</span><span class="spec-val">2-layer FR4, JLCPCB</span></div>
-        </div>
-      </div>
-
-      <!-- PCB render image — place Latchboard_PCB_Render.png in root folder -->
-      <div>
-        <div class="proj-section-label">Hardware</div>
-        <img class="proj-img" src="fsae/Latchboard_PCB_Render.png" alt="Latchboard PCB 3D render"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="img-placeholder" style="display:none;">Latchboard_PCB_Render.png — place in fsae/ folder</div>
-      </div>
-
-      <a class="poster-card" href="fsae/index.html">
-        <div class="poster-card-left">
-          <span class="poster-card-label">Full technical poster</span>
-          <span class="poster-card-title">Formula SAE Safety Shutdown Circuit — 2-page PDF-ready poster</span>
-        </div>
-        <span class="poster-card-arrow">→</span>
-      </a>
-
-    </div>
-  </div><!-- /fsae -->
-
-
-  <!-- ══════════════════════════════════════════════
-       PROJECT 2 — REPHLUX
+       PROJECT 1 — REPHLUX
        ══════════════════════════════════════════════ -->
   <div class="project" id="rephlux" data-tags="pcb embedded rf">
 
     <div class="proj-sidebar">
-      <div class="proj-number">02 / 04</div>
+      <div class="proj-number">01 / 04</div>
       <div class="proj-title">RepHlux</div>
       <div class="proj-org">UCI Senior Design</div>
       <div class="proj-date">Sep 2025 – Mar 2026</div>
@@ -526,7 +446,6 @@ footer {
         </div>
       </div>
 
-      <!-- Image: conference photo from senior design review -->
       <div>
         <div class="proj-section-label">Hardware</div>
         <img class="proj-img" src="rephlux.jpg" alt="RepHlux team at UCI Senior Design Review"
@@ -547,12 +466,167 @@ footer {
 
 
   <!-- ══════════════════════════════════════════════
-       PROJECT 3 — CHORDINATES
+       PROJECT 2 — FSAE SHUTDOWN CIRCUIT
+       ══════════════════════════════════════════════ -->
+  <div class="project" id="fsae" data-tags="pcb embedded competition">
+
+    <div class="proj-sidebar">
+      <div class="proj-number">02 / 04</div>
+      <div class="proj-title">Safety Shutdown Circuit</div>
+      <div class="proj-org">UCI Formula SAE</div>
+      <div class="proj-date">Sep 2024 – Jun 2025</div>
+      <div class="proj-tag-list">
+        <span class="proj-tag">KiCad</span>
+        <span class="proj-tag">LTspice</span>
+        <span class="proj-tag">Relay Logic</span>
+        <span class="proj-tag">FSAE EV.7</span>
+        <span class="proj-tag">JLCPCB</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="fsae/index.html">Full poster (2 pages)</a>
+      </div>
+    </div>
+
+    <div class="proj-content">
+
+      <div>
+        <div class="proj-section-label">Overview</div>
+        <p class="proj-summary">
+          The FSAE EV.7 Shutdown Circuit is a <strong>series interlock loop</strong> — any one of eight independent fault sources can open the loop and kill the tractive system. This project covers two of those segments: the <strong>Latchboard PCB</strong> and the <strong>BSPD comparator circuit</strong>, both designed from scratch.
+        </p>
+        <p class="proj-summary" style="margin-top:12px;">
+          The latchboard implements three independent self-latching relay stages (BMS, IMD, BSPD). Once any stage trips, the relay <strong>latches open regardless of driver input</strong> and requires a person to physically reset it at the vehicle — satisfying EV.7.2.3. The BSPD comparator detects simultaneous hard brake and throttle, flagging sensor failure or stuck pedal per EV.7.7.
+        </p>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Results</div>
+        <div class="result-row">
+          <span class="result-pill red">&lt;20 ms shutdown</span>
+          <span class="result-pill gold">100% fault detection</span>
+          <span class="result-pill blue">50+ bench tests</span>
+          <span class="result-pill gold">FSAE inspection passed</span>
+          <span class="result-pill red">3-stage isolation</span>
+          <span class="result-pill blue">HV chain integrated</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Key Specifications</div>
+        <div class="specs-mini">
+          <div class="spec-row"><span class="spec-key">Shutdown response</span><span class="spec-val">&lt;20 ms</span></div>
+          <div class="spec-row"><span class="spec-key">Operating voltage</span><span class="spec-val">12V DC</span></div>
+          <div class="spec-row"><span class="spec-key">Relay contact rating</span><span class="spec-val">5A / 125VDC</span></div>
+          <div class="spec-row"><span class="spec-key">Relay part</span><span class="spec-val">G6B-2214P-US BC12</span></div>
+          <div class="spec-row"><span class="spec-key">Fault stages</span><span class="spec-val">3 independent</span></div>
+          <div class="spec-row"><span class="spec-key">Latch behavior</span><span class="spec-val">NO self-hold</span></div>
+          <div class="spec-row"><span class="spec-key">BSPD threshold</span><span class="spec-val">&lt;0V and &gt;4.5V</span></div>
+          <div class="spec-row"><span class="spec-key">PCB</span><span class="spec-val">2-layer FR4, JLCPCB</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Hardware</div>
+        <img class="proj-img" src="fsae/Latchboard_PCB_Render.png" alt="Latchboard PCB 3D render"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-placeholder" style="display:none;">Latchboard_PCB_Render.png — place in fsae/ folder</div>
+      </div>
+
+      <a class="poster-card" href="fsae/index.html">
+        <div class="poster-card-left">
+          <span class="poster-card-label">Full technical poster</span>
+          <span class="poster-card-title">Formula SAE Safety Shutdown Circuit — 2-page PDF-ready poster</span>
+        </div>
+        <span class="poster-card-arrow">→</span>
+      </a>
+
+    </div>
+  </div><!-- /fsae -->
+
+
+  <!-- ══════════════════════════════════════════════
+       PROJECT 3 — TUBE FURNACE
+       ══════════════════════════════════════════════ -->
+  <div class="project" id="furnace" data-tags="pcb embedded">
+
+    <div class="proj-sidebar">
+      <div class="proj-number">03 / 04</div>
+      <div class="proj-title">1200°C Tube Furnace</div>
+      <div class="proj-org">Hacker Fab / UCI</div>
+      <div class="proj-date">Sep 2024 – Jun 2025</div>
+      <div class="proj-tag-list">
+        <span class="proj-tag">ATmega8A</span>
+        <span class="proj-tag">PID Control</span>
+        <span class="proj-tag">HV Isolation</span>
+        <span class="proj-tag">KiCad</span>
+        <span class="proj-tag">Thermocouple</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="furnace/index.html">Full poster (2 pages)</a>
+      </div>
+    </div>
+
+    <div class="proj-content">
+
+      <div>
+        <div class="proj-section-label">Overview</div>
+        <p class="proj-summary">
+          A <strong>low-cost programmable alumina-tube furnace</strong> for semiconductor oxidation, built to give students access to fabrication-grade thermal processing without commercial equipment costs. The furnace reaches 1200°C with PID-controlled temperature ramp and hold.
+        </p>
+        <p class="proj-summary" style="margin-top:12px;">
+          Designed the <strong>PID temperature control PCB</strong> around an ATmega8A MCU with K-type thermocouple feedback, driving a HV heating element through a solid-state relay. HV isolation achieved with alumina ceramic tube, SSR, and high-current fuse. Silicon wafer oxidation verified under microscope. Delivered under <strong>$500 versus $3,000+ commercial alternatives</strong>.
+        </p>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Results</div>
+        <div class="result-row">
+          <span class="result-pill gold">±2°C accuracy to 1200°C</span>
+          <span class="result-pill red">20°C/min ramp rate</span>
+          <span class="result-pill blue">&lt;$500 total cost</span>
+          <span class="result-pill gold">SiO₂ film verified</span>
+          <span class="result-pill red">HV SSR isolation</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Key Specifications</div>
+        <div class="specs-mini">
+          <div class="spec-row"><span class="spec-key">Max temperature</span><span class="spec-val">1200°C</span></div>
+          <div class="spec-row"><span class="spec-key">Temp accuracy</span><span class="spec-val">±2°C</span></div>
+          <div class="spec-row"><span class="spec-key">Ramp rate</span><span class="spec-val">20°C/min</span></div>
+          <div class="spec-row"><span class="spec-key">MCU</span><span class="spec-val">ATmega8A</span></div>
+          <div class="spec-row"><span class="spec-key">HV switching</span><span class="spec-val">Solid-state relay</span></div>
+          <div class="spec-row"><span class="spec-key">Total cost</span><span class="spec-val">&lt;$500</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Hardware</div>
+        <img class="proj-img" src="furnace/furnace_glowing.png" alt="Tube furnace at 1200°C"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-placeholder" style="display:none;">furnace/furnace_glowing.png — add to furnace/ folder</div>
+      </div>
+
+      <a class="poster-card" href="furnace/index.html">
+        <div class="poster-card-left">
+          <span class="poster-card-label">Full technical poster</span>
+          <span class="poster-card-title">1200°C Tube Furnace for Semiconductor Oxidation — 2-page PDF-ready poster</span>
+        </div>
+        <span class="poster-card-arrow">→</span>
+      </a>
+
+    </div>
+  </div><!-- /furnace -->
+
+
+  <!-- ══════════════════════════════════════════════
+       PROJECT 4 — CHORDINATES
        ══════════════════════════════════════════════ -->
   <div class="project" id="chordinates" data-tags="embedded rf competition">
 
     <div class="proj-sidebar">
-      <div class="proj-number">03 / 04</div>
+      <div class="proj-number">04 / 04</div>
       <div class="proj-title">Chordinates</div>
       <div class="proj-org">E-SONIC Competition</div>
       <div class="proj-date">Dec 2025 – Apr 2026</div>
@@ -602,64 +676,6 @@ footer {
 
     </div>
   </div><!-- /chordinates -->
-
-
-  <!-- ══════════════════════════════════════════════
-       PROJECT 4 — TUBE FURNACE
-       ══════════════════════════════════════════════ -->
-  <div class="project" id="furnace" data-tags="pcb embedded">
-
-    <div class="proj-sidebar">
-      <div class="proj-number">04 / 04</div>
-      <div class="proj-title">1200°C Tube Furnace</div>
-      <div class="proj-org">Hacker Fab / UCI</div>
-      <div class="proj-date">Sep 2024 – Jun 2025</div>
-      <div class="proj-tag-list">
-        <span class="proj-tag">ATmega8A</span>
-        <span class="proj-tag">PID Control</span>
-        <span class="proj-tag">HV Isolation</span>
-        <span class="proj-tag">KiCad</span>
-        <span class="proj-tag">Thermocouple</span>
-      </div>
-    </div>
-
-    <div class="proj-content">
-
-      <div>
-        <div class="proj-section-label">Overview</div>
-        <p class="proj-summary">
-          A <strong>low-cost programmable alumina-tube furnace</strong> for semiconductor oxidation, built to give students access to fabrication-grade thermal processing without commercial equipment costs. The furnace reaches 1200°C with PID-controlled temperature ramp and hold.
-        </p>
-        <p class="proj-summary" style="margin-top:12px;">
-          A custom PCB uses an <strong>ATmega8A MCU</strong> with thermocouple feedback to drive a high-voltage heating element through a solid-state relay. HV isolation is achieved with an alumina ceramic tube, SSR, and high-current fuse. Verified silicon wafer oxidation was confirmed under microscope. Delivered under <strong>$500 versus $3,000+ commercial alternatives</strong>.
-        </p>
-      </div>
-
-      <div>
-        <div class="proj-section-label">Results</div>
-        <div class="result-row">
-          <span class="result-pill gold">±2°C accuracy to 1200°C</span>
-          <span class="result-pill red">20°C/min ramp rate</span>
-          <span class="result-pill blue">&lt;$500 total cost</span>
-          <span class="result-pill gold">Wafer oxidation verified</span>
-          <span class="result-pill red">HV isolated SSR drive</span>
-        </div>
-      </div>
-
-      <div>
-        <div class="proj-section-label">Key Specifications</div>
-        <div class="specs-mini">
-          <div class="spec-row"><span class="spec-key">Max temperature</span><span class="spec-val">1200°C</span></div>
-          <div class="spec-row"><span class="spec-key">Temp accuracy</span><span class="spec-val">±2°C</span></div>
-          <div class="spec-row"><span class="spec-key">Ramp rate</span><span class="spec-val">20°C/min</span></div>
-          <div class="spec-row"><span class="spec-key">Control</span><span class="spec-val">PID, ATmega8A</span></div>
-          <div class="spec-row"><span class="spec-key">HV switching</span><span class="spec-val">Solid-state relay</span></div>
-          <div class="spec-row"><span class="spec-key">Total cost</span><span class="spec-val">&lt;$500</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- /furnace -->
 
 </div><!-- /projects-list -->
 
