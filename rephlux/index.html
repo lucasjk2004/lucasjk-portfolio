@@ -125,8 +125,10 @@ header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #8
 .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
 /* ── FOOTER ── */
-footer { background: var(--navy); color: #6a9ab8; font-size: 10px; padding: 5px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-top: 2px solid var(--teal-lt); white-space: nowrap; gap: 12px; }
+footer { background: var(--navy); color: #6a9ab8; font-size: 10px; padding: 5px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-top: 2px solid var(--teal-lt); gap: 12px; }
 footer strong { color: white; }
+footer .f-left { display: flex; flex-direction: column; gap: 1px; }
+footer .f-right { text-align: right; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -140,7 +142,7 @@ footer strong { color: white; }
       <div class="h-left">
         <div class="badge"><em>UCI</em> Engineering</div>
         <h1>RepHlux — Wireless Batteryless Acid Reflux Monitor
-          <small>Lucas Kang &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f498819795879e9fc6c4c4c0b49399959d98da979b99">[email&#160;protected]</a> &nbsp;·&nbsp; UCI Engineering Senior Design</small>
+          <small>Lucas Kang &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b574e585a485150090b0b0f7b5c565a525715585456">[email&#160;protected]</a> &nbsp;·&nbsp; UCI Engineering Senior Design</small>
         </h1>
       </div>
       <div class="h-right">
@@ -225,8 +227,11 @@ footer strong { color: white; }
   </div>
 
   <footer>
-    <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660 &nbsp;·&nbsp; github.com/lucasjk2004</div>
-    <div>UCI Engineering Senior Design &nbsp;·&nbsp; Samueli School of Engineering &nbsp;·&nbsp; Sep 2025 – Mar 2026</div>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef839a8c8e9c8584dddfdfdbaf88828e8683c18c8082">[email&#160;protected]</a> &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">UCI Engineering Senior Design &nbsp;·&nbsp; Samueli School of Engineering<br>Sep 2025 – Mar 2026</div>
   </footer>
 </div><!-- /page 1 -->
 
@@ -240,7 +245,7 @@ footer strong { color: white; }
       <div class="h-left">
         <div class="badge"><em>UCI</em> Engineering</div>
         <h1>RepHlux — Wireless Batteryless Acid Reflux Monitor
-          <small>Lucas Kang &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9b5acbab8aab3b2ebe9e9ed99beb4b8b0b5f7bab6b4">[email&#160;protected]</a> &nbsp;·&nbsp; UCI Engineering Senior Design</small>
+          <small>Lucas Kang &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea2bbadafbda4a5fcfefefa8ea9a3afa7a2e0ada1a3">[email&#160;protected]</a> &nbsp;·&nbsp; UCI Engineering Senior Design</small>
         </h1>
       </div>
       <div class="h-right">
@@ -329,11 +334,9 @@ footer strong { color: white; }
           <div class="vid-note">demo.mp4 —<br>place in rephlux/ folder</div>
         </div>
         <div class="timestamps">
-          <div class="ts-row"><span class="ts">0:00</span><span class="ts-text">Belt reader powered, carrier at 215 kHz confirmed on oscilloscope</span></div>
-          <div class="ts-row"><span class="ts">0:10</span><span class="ts-text">Implant board placed at 10 cm — 2.5 V rectified output verified</span></div>
-          <div class="ts-row"><span class="ts">0:25</span><span class="ts-text">pH sensor swept — FFT sideband shifts in real time on PC readout</span></div>
-          <div class="ts-row"><span class="ts">0:45</span><span class="ts-text">Impedance sensor swept — second sideband band responds independently</span></div>
-          <div class="ts-row"><span class="ts">1:00</span><span class="ts-text">Bluetooth alert triggered when coil misaligned beyond 15 mm threshold</span></div>
+          <div class="ts-row"><span class="ts">0:00</span><span class="ts-text">System powered on — belt coil energized at 215 kHz, 2.5 V DC on implant confirmed with multimeter.</span></div>
+          <div class="ts-row"><span class="ts">0:05</span><span class="ts-text">Impedance sensor channel activated — sideband at 189 kHz appears in FFT spectrum alongside 215 kHz center frequency.</span></div>
+          <div class="ts-row"><span class="ts">0:13</span><span class="ts-text">Impedance sensor swept via potentiometer — sideband shifts 189 kHz → 205 kHz → 189 kHz, confirming frequency-encoded impedance telemetry.</span></div>
         </div>
       </div>
     </div>
@@ -357,7 +360,7 @@ footer strong { color: white; }
 
         <div>
           <div class="sub">Acknowledgements</div>
-          <p class="ack">Analog telemetry designed and validated by Lucas Kang as part of UCI Engineering Senior Design under Prof. Cao (hungcao@uci.edu) in collaboration with UCI Hero Lab.</p>
+          <p class="ack">Analog telemetry designed and validated by Lucas Kang as part of UCI Engineering Senior Design under Prof. Cao (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d7568737a7e7c725d687e7433787968">[email&#160;protected]</a>) in collaboration with UCI Hero Lab.</p>
         </div>
 
         <div>
@@ -371,14 +374,3 @@ footer strong { color: white; }
 
       </div>
     </div>
-
-  </div>
-
-  <footer>
-    <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660 &nbsp;·&nbsp; github.com/lucasjk2004</div>
-    <div>UCI Engineering Senior Design &nbsp;·&nbsp; Samueli School of Engineering &nbsp;·&nbsp; Sep 2025 – Mar 2026</div>
-  </footer>
-</div><!-- /page 2 -->
-
-</body>
-</html>
