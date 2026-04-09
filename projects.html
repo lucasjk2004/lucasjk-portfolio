@@ -481,7 +481,10 @@ footer {
         <span class="proj-tag">AM Telemetry</span>
         <span class="proj-tag">dsPIC33CK</span>
         <span class="proj-tag">LTC4126EDC</span>
-        <span class="proj-tag">KiCad</span>
+        <span class="proj-tag">VCO Load Mod</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="rephlux/index.html">Full poster (2 pages)</a>
       </div>
     </div>
 
@@ -490,22 +493,22 @@ footer {
       <div>
         <div class="proj-section-label">Overview</div>
         <p class="proj-summary">
-          RepHlux is a <strong>wireless, batteryless acid reflux monitor</strong> designed for continuous esophageal pH and impedance sensing without the bulk of a battery or wired connection. The implant is powered entirely through <strong>inductive coupling at 215 kHz</strong> from an external belt reader.
+          RepHlux is a <strong>wireless, batteryless acid reflux monitor</strong> — an analog implant powered entirely through inductive coupling at 215 kHz, with no battery or wired connection. I designed the power rectification circuit and batteryless telemetry architecture as part of a four-person senior design team.
         </p>
         <p class="proj-summary" style="margin-top:12px;">
-          Sensor data (pH, impedance, power) is encoded into <strong>VCO load-modulated frequency signals</strong> in the 0–50 kHz band, which appear as amplitude modulation sidebands on the carrier and are detected by FFT on the reader DSP. The fully analog implant architecture miniaturizes to 4 cm, meeting ISO 14708 voltage and power limits.
+          pH and impedance readings are encoded as frequency shifts via VCO-based sensor oscillators, which switch a modulation load on the implant. This appears as <strong>AM sideband reflected impedance</strong> at the external reader belt, enabling passive data transmission at 10–80 kHz sidebands around the 215 kHz carrier — decoded by FFT on the reader DSP.
         </p>
       </div>
 
       <div>
         <div class="proj-section-label">Results</div>
         <div class="result-row">
-          <span class="result-pill gold">2.5V wireless power at 10 cm</span>
-          <span class="result-pill blue">~800 ms telemetry response</span>
-          <span class="result-pill red">94 mW output power</span>
-          <span class="result-pill gold">215 kHz carrier</span>
-          <span class="result-pill blue">Bluetooth fault feedback</span>
-          <span class="result-pill red">Fully analog implant</span>
+          <span class="result-pill red">94 mW wireless power</span>
+          <span class="result-pill gold">2.5 V DC rectified</span>
+          <span class="result-pill blue">FFT sidebands verified</span>
+          <span class="result-pill gold">15 mm operating depth</span>
+          <span class="result-pill red">ISO 14708 safe voltage</span>
+          <span class="result-pill blue">AM telemetry confirmed</span>
         </div>
       </div>
 
@@ -515,20 +518,29 @@ footer {
           <div class="spec-row"><span class="spec-key">Carrier frequency</span><span class="spec-val">215 kHz</span></div>
           <div class="spec-row"><span class="spec-key">Output voltage</span><span class="spec-val">2.5V DC</span></div>
           <div class="spec-row"><span class="spec-key">Output power</span><span class="spec-val">94 mW</span></div>
-          <div class="spec-row"><span class="spec-key">Implant power</span><span class="spec-val">26 mW</span></div>
-          <div class="spec-row"><span class="spec-key">Telemetry BW</span><span class="spec-val">10–80 kHz sidebands</span></div>
           <div class="spec-row"><span class="spec-key">Max operating depth</span><span class="spec-val">15 mm</span></div>
+          <div class="spec-row"><span class="spec-key">Telemetry BW</span><span class="spec-val">10–80 kHz sidebands</span></div>
           <div class="spec-row"><span class="spec-key">Implant architecture</span><span class="spec-val">Fully analog</span></div>
-          <div class="spec-row"><span class="spec-key">Comms (reader)</span><span class="spec-val">UART / SPI / BT</span></div>
+          <div class="spec-row"><span class="spec-key">MCU</span><span class="spec-val">dsPIC33CK64MC105</span></div>
+          <div class="spec-row"><span class="spec-key">Rectifier IC</span><span class="spec-val">LTC4126EDC</span></div>
         </div>
       </div>
 
+      <!-- Image: conference photo from senior design review -->
       <div>
-        <div class="proj-section-label">System Architecture</div>
-        <div class="img-placeholder">
-          RepHlux block diagram / poster image — add rephlux_poster.png to root
-        </div>
+        <div class="proj-section-label">Hardware</div>
+        <img class="proj-img" src="rephlux.jpg" alt="RepHlux team at UCI Senior Design Review"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-placeholder" style="display:none;">rephlux.jpg</div>
       </div>
+
+      <a class="poster-card" href="rephlux/index.html">
+        <div class="poster-card-left">
+          <span class="poster-card-label">Full technical poster</span>
+          <span class="poster-card-title">RepHlux — Wireless Batteryless Acid Reflux Monitor — 2-page PDF-ready poster</span>
+        </div>
+        <span class="poster-card-arrow">→</span>
+      </a>
 
     </div>
   </div><!-- /rephlux -->
