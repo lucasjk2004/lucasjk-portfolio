@@ -10,8 +10,35 @@
 @media print {
   @page { size: 8.5in 11in portrait; margin: 0; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  .page { page-break-after: always; }
-  .page:last-child { page-break-after: avoid; }
+
+  body { background: white !important; padding: 0 !important; margin: 0 !important; }
+
+  .page {
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    margin: 0 !important;
+    width: 8.5in !important;
+    height: 11in !important;
+    max-height: 11in !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Force flex:1 sections to fill remaining height in print layout */
+  .photo-area { flex: 1 1 auto !important; min-height: 0 !important; }
+  .two-col    { flex: 1 1 auto !important; min-height: 0 !important; }
+  .col-l, .col-r { min-height: 0 !important; overflow: hidden !important; }
+  .img-grid-2 { min-height: 0 !important; }
+  .flex-fill  { flex: 1 1 auto !important; min-height: 0 !important; }
+
+  /* Any flex:1 img-grid-2 (hardware sections) */
+  .page > .img-grid-2:last-of-type { flex: 1 1 auto !important; }
 }
 
 :root {
@@ -237,7 +264,7 @@ footer .f-right { text-align: right; white-space: nowrap; }
   <hr class="divider">
 
   <div class="sh teal">Hardware &amp; System Overview</div>
-  <div class="img-grid-2" style="flex:1; min-height:0; overflow:hidden;">
+  <div class="img-grid-2 flex-fill" style="flex:1; min-height:0; overflow:hidden;">
     <div class="img-cell" style="overflow:hidden;">
       <div class="img-wrap" style="flex:1; min-height:0; overflow:hidden;">
         <img src="rephlux/rephlux_prototype.png" style="width:100%;height:100%;object-fit:contain;display:block;"
@@ -472,7 +499,7 @@ footer .f-right { text-align: right; white-space: nowrap; }
   <hr class="divider">
 
   <div class="sh red">Hardware</div>
-  <div class="img-grid-2" style="flex:1; min-height:0;">
+  <div class="img-grid-2 flex-fill" style="flex:1; min-height:0;">
     <div class="img-cell">
       <div class="img-wrap" style="flex:1;">
         <img src="fsae/Latchboard_PCB_Render.png" style="width:100%;height:100%;object-fit:contain;display:block;"
