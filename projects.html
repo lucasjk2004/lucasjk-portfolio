@@ -120,7 +120,7 @@ nav {
   max-width: 560px;
 }
 
-/* ── PROJECT FILTER ── */
+/* ── FILTER BAR ── */
 .filter-bar {
   position: relative;
   z-index: 1;
@@ -130,6 +130,7 @@ nav {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
   border-bottom: 1px solid var(--border);
 }
 .filter-btn {
@@ -149,6 +150,35 @@ nav {
   border-color: var(--gold);
   color: var(--gold);
   background: rgba(232,160,32,0.06);
+}
+
+/* ── VIEW ALL POSTERS BUTTON ── */
+.all-posters-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border: 1px solid rgba(26,154,154,0.5);
+  color: #1a9a9a;
+  background: rgba(14,106,106,0.08);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.15s;
+  margin-left: auto; /* push to the right */
+}
+.all-posters-btn:hover {
+  border-color: #1a9a9a;
+  background: rgba(14,106,106,0.18);
+  color: #4dd0d0;
+}
+.all-posters-btn::after {
+  content: '→';
+  font-size: 12px;
 }
 
 /* ── PROJECT ENTRY ── */
@@ -382,6 +412,7 @@ footer {
   <button class="filter-btn" onclick="filterProjects('embedded', this)">Embedded</button>
   <button class="filter-btn" onclick="filterProjects('rf', this)">RF / Wireless</button>
   <button class="filter-btn" onclick="filterProjects('competition', this)">Competition</button>
+  <a class="all-posters-btn" href="all_posters.html" target="_blank">View All Posters</a>
 </div>
 
 <div class="projects-list">

@@ -20,20 +20,11 @@
   --cream:  #f6f4ef; --border: #d4d0c8; --text: #1a1814; --dgray: #4a4642;
 }
 
-body { font-family: 'DM Sans', sans-serif; background: #ccc; color: var(--text); margin: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #ccc; color: var(--text); margin: 0; padding: 32px 0; }
 
-/* ── PAGE ── */
-.page {
-  width: 816px; height: 1056px; background: white;
-  margin: 0 auto 32px; display: flex; flex-direction: column;
-  overflow: hidden;
-}
+.page { width: 816px; height: 1056px; background: white; margin: 0 auto 32px; display: flex; flex-direction: column; overflow: hidden; }
 
-/* ── HEADER ── */
-header {
-  background: var(--navy); flex-shrink: 0;
-  padding: 13px 22px 11px; border-bottom: 3px solid var(--teal-lt);
-}
+header { background: var(--navy); flex-shrink: 0; padding: 13px 22px 11px; border-bottom: 3px solid var(--teal-lt); }
 .h-top { display: flex; align-items: flex-start; justify-content: space-between; }
 .h-left { display: flex; align-items: center; gap: 14px; }
 .badge { background: white; color: var(--navy); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 4px; flex-shrink: 0; }
@@ -44,7 +35,6 @@ header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #8
 .h-right strong { color: white; font-size: 11px; }
 .pg-label { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #4a7080; margin-top: 7px; padding-top: 5px; border-top: 1px solid #1e3858; }
 
-/* ── SECTION HEADER ── */
 .sh { font-size: 9px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 5px 12px; flex-shrink: 0; }
 .sh.teal  { background: var(--teal);  color: white; }
 .sh.navy  { background: var(--navy);  color: white; }
@@ -52,7 +42,6 @@ header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #8
 .sh.dark  { background: #1e2c3a;      color: white; }
 .sh.red   { background: var(--red);   color: white; }
 
-/* ── INTRO ── */
 .section-pad { padding: 13px 16px; }
 .tag { font-size: 8.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; font-family: 'DM Mono', monospace; white-space: nowrap; vertical-align: middle; display: inline-block; margin-right: 5px; }
 .tag.nv { background: var(--navy);  color: var(--gold-lt); }
@@ -63,7 +52,6 @@ header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #8
 .td:last-child { margin-bottom: 0; }
 .td strong { color: var(--navy); }
 
-/* ── SPECS ── */
 .specs-wrap { padding: 0 16px 13px; }
 .specs-wrap table { width: 100%; border-collapse: collapse; font-size: 11px; }
 .specs-wrap thead tr { background: var(--navy); }
@@ -75,31 +63,21 @@ header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #8
 .specs-wrap td:last-child  { color: var(--dgray); font-size: 10px; }
 .val { color: var(--navy); font-weight: 600; font-family: 'DM Mono', monospace; }
 
-/* ── IMAGES ── */
+/* ── IMAGE CELLS ── */
 .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; flex-shrink: 0; }
-.img-grid-1 { display: grid; grid-template-columns: 1fr; flex-shrink: 0; }
 .img-cell { display: flex; flex-direction: column; border: 1px solid var(--border); }
 .img-cell + .img-cell { border-left: none; }
 .img-wrap { flex: 1; background: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 0; }
-.img-wrap.dark { background: #0d1117; }
-
-/* Replace img-slot with: <img src="filename.png" style="width:100%;height:100%;object-fit:contain;display:block;"> */
-.img-slot { width: 100%; min-height: 190px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border: 1.5px dashed #b0b0b0; color: #888; font-size: 10px; text-align: center; padding: 10px; }
-.img-slot.dark { border-color: #2a3248; color: #445; }
-.slot-tag { background: var(--teal); color: white; font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; font-family: 'DM Mono', monospace; }
-.slot-hint { font-size: 9px; color: #888; line-height: 1.4; }
-.img-cap { background: rgba(14,106,106,0.85); color: #d0eee8; font-size: 9.5px; padding: 4px 10px; line-height: 1.4; flex-shrink: 0; border-top: 1.5px solid var(--teal-lt); }
+/* FIX: cap must wrap, not clip on one line */
+.img-cap { background: rgba(14,106,106,0.88); color: #d0eee8; font-size: 9px; padding: 4px 10px; line-height: 1.4; flex-shrink: 0; border-top: 1.5px solid var(--teal-lt); white-space: normal; overflow: hidden; }
 .img-cap strong { color: #a0eee0; }
+.img-slot { width: 100%; height: 100%; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #888; font-size: 9px; text-align: center; padding: 10px; border: 1.5px dashed #c0bdb5; }
+.slot-tag { background: var(--teal); color: white; font-size: 8px; font-weight: 700; padding: 2px 7px; border-radius: 2px; font-family: 'DM Mono', monospace; }
 
-/* ── BLOCK DIAGRAM ── */
-.block-section { padding: 0; flex-shrink: 0; }
-
-/* ── TWO-COL ── */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; border-top: 1px solid var(--border); }
 .col-l { border-right: 1px solid var(--border); display: flex; flex-direction: column; }
 .col-r { display: flex; flex-direction: column; background: #f0f4f2; }
 
-/* video */
 .vid-inner { padding: 12px 14px; display: flex; gap: 12px; flex: 1; }
 .vid-thumb { width: 160px; flex-shrink: 0; background: #161b27; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border: 1.5px dashed #2a3248; align-self: stretch; }
 .play-btn { width: 32px; height: 32px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -110,7 +88,6 @@ header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #8
 .ts { background: var(--navy); color: var(--gold-lt); font-size: 9px; font-weight: 500; font-family: 'DM Mono', monospace; padding: 2px 5px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
 .ts-text { font-size: 11px; color: #444; line-height: 1.5; }
 
-/* results */
 .res-inner { padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
 .sub { font-size: 8.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 2px; }
 .pills { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -122,9 +99,8 @@ header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #8
 .tools { font-size: 10.5px; color: #333; line-height: 1.8; }
 .tools strong { color: var(--navy); }
 
-.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; flex-shrink: 0; }
 
-/* ── FOOTER ── */
 footer { background: var(--navy); color: #6a9ab8; font-size: 10px; padding: 5px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-top: 2px solid var(--teal-lt); gap: 12px; }
 footer strong { color: white; }
 footer .f-left { display: flex; flex-direction: column; gap: 1px; }
@@ -133,16 +109,14 @@ footer .f-right { text-align: right; white-space: nowrap; }
 </head>
 <body>
 
-<!-- ╔══════════════════════════════════════════════════════╗
-     ║  PAGE 1 — Introduction · Specs · Hardware · Diagram ║
-     ╚══════════════════════════════════════════════════════╝ -->
+<!-- PAGE 1 -->
 <div class="page">
   <header>
     <div class="h-top">
       <div class="h-left">
         <div class="badge"><em>UCI</em> Engineering</div>
         <h1>RepHlux — Wireless Batteryless Acid Reflux Monitor
-          <small>Lucas Kang &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b574e585a485150090b0b0f7b5c565a525715585456">[email&#160;protected]</a> &nbsp;·&nbsp; UCI Engineering Senior Design</small>
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; UCI Engineering Senior Design</small>
         </h1>
       </div>
       <div class="h-right">
@@ -154,7 +128,6 @@ footer .f-right { text-align: right; white-space: nowrap; }
     <div class="pg-label">Page 1 of 2 &nbsp;·&nbsp; Introduction &nbsp;·&nbsp; Block Diagram &nbsp;·&nbsp; Hardware &amp; System Overview</div>
   </header>
 
-  <!-- INTRO -->
   <div class="sh teal">Introduction</div>
   <div class="section-pad">
     <div class="td">
@@ -170,65 +143,53 @@ footer .f-right { text-align: right; white-space: nowrap; }
 
   <hr class="divider">
 
-  <!-- BLOCK DIAGRAM (moved from Fig 2) -->
   <div class="sh gold">System Block Diagram</div>
   <div style="flex-shrink:0; border-bottom:1px solid var(--border);">
-    <div class="img-wrap" style="height:200px; background:#fff;">
+    <div class="img-wrap" style="height:188px; background:#fff;">
       <img src="rephlux_block.png" style="width:100%;height:100%;object-fit:contain;display:block;"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="img-slot" style="display:none; min-height:200px;">
-        <div class="slot-tag">📷 rephlux_block.png</div>
-        <div class="slot-hint">System block diagram — power belt + implant</div>
+      <div class="img-slot" style="display:none; min-height:188px;">
+        <div class="slot-tag">rephlux_block.png</div>
+        System block diagram — power belt + implant
       </div>
     </div>
-    <div class="img-cap">
-      <strong>Fig. 1</strong> System block diagram — power and reader belt generates 215 kHz carrier; implant rectifies to 2.5 V, sensor VCOs encode pH and impedance into frequency, MUX selects signal, load-modulation switch impresses sidebands on carrier for FFT readback.
+    <div class="img-cap" style="white-space:normal; line-height:1.4;">
+      <strong>Fig. 1</strong>&nbsp; System block diagram — power and reader belt generates 215 kHz carrier; implant rectifies to 2.5 V, sensor VCOs encode pH and impedance into frequency, MUX selects signal, load-modulation switch impresses sidebands on carrier for FFT readback.
     </div>
   </div>
 
   <hr class="divider">
 
-  <!-- HARDWARE IMAGES: prototype + body diagram -->
   <div class="sh teal">Hardware &amp; System Overview</div>
-  <div class="img-grid-2" style="flex:1; min-height:0;">
-
-    <!-- Fig 1: Prototype boards photo
-         Rename your photo to rephlux_prototype.png and place in rephlux/ folder -->
-    <div class="img-cell">
-      <div class="img-wrap" style="flex:1;">
+  <!-- FIX: fixed height grid so both cells are equal and neither overflows -->
+  <div class="img-grid-2" style="flex:1; min-height:0; overflow:hidden;">
+    <div class="img-cell" style="overflow:hidden;">
+      <div class="img-wrap" style="flex:1; min-height:0; overflow:hidden;">
         <img src="rephlux_prototype.png" style="width:100%;height:100%;object-fit:contain;display:block;"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot" style="display:none;">
-          <div class="slot-tag">📷 rephlux_prototype.png</div>
-          <div class="slot-hint">Photo of prototype boards<br>(implant transceiver + belt reader)</div>
+          <div class="slot-tag">rephlux_prototype.png</div>
+          Photo of prototype boards
         </div>
       </div>
-      <div class="img-cap">
-        <strong>Fig. 2</strong> Prototype boards — implant transceiver board (green, LTC4126EDC rectifier), load modulation switch, MCU carrier + FFT board (dsPIC33CK), signal multiplexor, impedance sensor oscillator, pH sensor VCO, and power efficiency VCO.
-      </div>
+      <div class="img-cap"><strong>Fig. 2</strong>&nbsp; Prototype boards — implant transceiver (LTC4126EDC rectifier), load modulation switch, dsPIC33CK MCU + FFT board, impedance sensor oscillator, pH sensor VCO, power efficiency VCO.</div>
     </div>
-
-    <!-- Fig 3: Body diagram / system mockup
-         Rename to rephlux_body.png and place in rephlux/ folder -->
-    <div class="img-cell" style="border-left:1px solid var(--border);">
-      <div class="img-wrap" style="flex:1; background:#fff;">
+    <div class="img-cell" style="border-left:1px solid var(--border); overflow:hidden;">
+      <div class="img-wrap" style="flex:1; background:#fff; min-height:0; overflow:hidden;">
         <img src="rephlux_body.png" style="width:100%;height:100%;object-fit:contain;display:block;"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot" style="display:none;">
-          <div class="slot-tag">📷 rephlux_body.png</div>
-          <div class="slot-hint">Body diagram — implant location,<br>inductive link, impedance + pH sensors,<br>base station FFT readout</div>
+          <div class="slot-tag">rephlux_body.png</div>
+          Body diagram — implant location, inductive link
         </div>
       </div>
-      <div class="img-cap">
-        <strong>Fig. 4</strong> System body diagram — acid reflux monitor implant sits in the esophagus, wirelessly powered by the external belt coil at 215 kHz. Impedance and pH sensors feed VCOs; sidebands appear in the base station FFT.
-      </div>
+      <div class="img-cap"><strong>Fig. 3</strong>&nbsp; System body diagram — implant sits in the esophagus, wirelessly powered by belt coil at 215 kHz. pH and impedance VCOs encode data; sidebands appear in base station FFT.</div>
     </div>
-
   </div>
 
   <footer>
     <div class="f-left">
-      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef839a8c8e9c8584dddfdfdbaf88828e8683c18c8082">[email&#160;protected]</a> &nbsp;·&nbsp; (650) 666-9660</div>
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660</div>
       <div>github.com/lucasjk2004</div>
     </div>
     <div class="f-right">UCI Engineering Senior Design &nbsp;·&nbsp; Samueli School of Engineering<br>Sep 2025 – Mar 2026</div>
@@ -236,16 +197,14 @@ footer .f-right { text-align: right; white-space: nowrap; }
 </div><!-- /page 1 -->
 
 
-<!-- ╔══════════════════════════════════════════════════════╗
-     ║  PAGE 2 — Results · FFT · Plots · Video             ║
-     ╚══════════════════════════════════════════════════════╝ -->
+<!-- PAGE 2 -->
 <div class="page">
   <header>
     <div class="h-top">
       <div class="h-left">
         <div class="badge"><em>UCI</em> Engineering</div>
         <h1>RepHlux — Wireless Batteryless Acid Reflux Monitor
-          <small>Lucas Kang &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea2bbadafbda4a5fcfefefa8ea9a3afa7a2e0ada1a3">[email&#160;protected]</a> &nbsp;·&nbsp; UCI Engineering Senior Design</small>
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; UCI Engineering Senior Design</small>
         </h1>
       </div>
       <div class="h-right">
@@ -257,7 +216,6 @@ footer .f-right { text-align: right; white-space: nowrap; }
     <div class="pg-label">Page 2 of 2 &nbsp;·&nbsp; Design Specifications &nbsp;·&nbsp; Measurement Results &nbsp;·&nbsp; FFT Telemetry</div>
   </header>
 
-  <!-- SPECS (moved from page 1) -->
   <div class="sh navy">Design Specifications</div>
   <div class="specs-wrap" style="padding-top:8px; padding-bottom:8px;">
     <table>
@@ -277,75 +235,54 @@ footer .f-right { text-align: right; white-space: nowrap; }
 
   <hr class="divider">
 
-  <!-- THREE RESULT IMAGES -->
   <div class="sh teal">Measurement Results</div>
-  <div style="display:grid; grid-template-columns:1fr 1fr; flex-shrink:0; height:290px;">
-
-    <!-- Fig 4: Frequency response plot
-         Rename to rephlux_freq_response.png -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; flex-shrink:0; height:270px; border-bottom:1px solid var(--border);">
     <div class="img-cell">
-      <div class="img-wrap" style="flex:1; background:#fff;">
+      <div class="img-wrap" style="flex:1; background:#fff; min-height:0;">
         <img src="rephlux_freq_response.png" style="width:100%;height:100%;object-fit:contain;display:block;"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot" style="display:none;">
-          <div class="slot-tag">📷 rephlux_freq_response.png</div>
-          <div class="slot-hint">Frequency response of power,<br>pH, and impedance sensors</div>
+          <div class="slot-tag">rephlux_freq_response.png</div>
+          Frequency response — power, pH, impedance sensors
         </div>
       </div>
-      <div class="img-cap">
-        <strong>Fig. 3</strong> Frequency response — VCO output frequency vs. sensor input for power (green), pH electric potential (blue), and impedance (red). Three distinct frequency bands enable simultaneous demultiplexing.
-      </div>
+      <div class="img-cap"><strong>Fig. 4</strong>&nbsp; Frequency response — VCO output vs. sensor input for power (green), pH (blue), and impedance (red). Three distinct bands enable simultaneous demultiplexing.</div>
     </div>
-
-    <!-- Fig 5: Distance vs power plot
-         Rename to rephlux_power_dist.png -->
-    <div class="img-cell" style="border-left:1px solid var(--border);">
-      <div class="img-wrap" style="flex:1; background:#fff;">
+    <div class="img-cell">
+      <div class="img-wrap" style="flex:1; background:#fff; min-height:0;">
         <img src="rephlux_power_dist.png" style="width:100%;height:100%;object-fit:contain;display:block;"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="img-slot" style="display:none;">
-          <div class="slot-tag">📷 rephlux_power_dist.png</div>
-          <div class="slot-hint">Distance of coils<br>vs wireless power</div>
+          <div class="slot-tag">rephlux_power_dist.png</div>
+          Distance vs wireless power
         </div>
       </div>
-      <div class="img-cap">
-        <strong>Fig. 4</strong> Distance vs wireless power — 94 mW at 13.5 mm, dropping to ~1 mW at 18.5 mm. Operating range maintained at ≤15 mm with voltage regulator feedback loop.
-      </div>
+      <div class="img-cap"><strong>Fig. 5</strong>&nbsp; Distance vs wireless power — 94 mW at 13.5 mm, dropping to ~1 mW at 18.5 mm. Operating range maintained at ≤15 mm with voltage regulator feedback loop.</div>
     </div>
-
   </div>
 
-  <hr class="divider">
-
-  <!-- VIDEO + RESULTS -->
   <div class="two-col" style="flex:1; min-height:0;">
-
-    <!-- VIDEO -->
     <div class="col-l">
       <div class="sh teal">Video Demonstration</div>
       <div class="vid-inner" style="align-items:flex-start; flex:1;">
-        <!-- Rename video to demo.mp4 and place in rephlux/ folder -->
         <video src="demo.mp4" controls
           style="width:160px;height:100%;object-fit:cover;border-radius:4px;flex-shrink:0;align-self:stretch;background:#161b27;"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         </video>
         <div class="vid-thumb" style="display:none;">
           <div class="play-btn"></div>
-          <div class="vid-note">demo.mp4 —<br>place in rephlux/ folder</div>
+          <div class="vid-note">demo.mp4 — place in rephlux/ folder</div>
         </div>
         <div class="timestamps">
           <div class="ts-row"><span class="ts">0:00</span><span class="ts-text">System powered on — belt coil energized at 215 kHz, 2.5 V DC on implant confirmed with multimeter.</span></div>
           <div class="ts-row"><span class="ts">0:05</span><span class="ts-text">Impedance sensor channel activated — sideband at 189 kHz appears in FFT spectrum alongside 215 kHz center frequency.</span></div>
-          <div class="ts-row"><span class="ts">0:13</span><span class="ts-text">Impedance sensor swept via potentiometer — sideband shifts 189 kHz → 205 kHz → 189 kHz, confirming frequency-encoded impedance telemetry.</span></div>
+          <div class="ts-row"><span class="ts">0:13</span><span class="ts-text">Impedance sensor swept via potentiometer — sideband shifts 189 → 205 → 189 kHz, confirming frequency-encoded impedance telemetry.</span></div>
         </div>
       </div>
     </div>
-
-    <!-- RESULTS & ACK -->
     <div class="col-r">
       <div class="sh dark">Results &amp; Acknowledgements</div>
       <div class="res-inner">
-
         <div>
           <div class="sub">Validated Results</div>
           <div class="pills" style="margin-top:5px;">
@@ -357,12 +294,10 @@ footer .f-right { text-align: right; white-space: nowrap; }
             <span class="pill gd">AM telemetry confirmed</span>
           </div>
         </div>
-
         <div>
           <div class="sub">Acknowledgements</div>
-          <p class="ack">Analog telemetry designed and validated by Lucas Kang as part of UCI Engineering Senior Design under Prof. Cao (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d7568737a7e7c725d687e7433787968">[email&#160;protected]</a>) in collaboration with UCI Hero Lab.</p>
+          <p class="ack">Analog telemetry designed and validated by Lucas Kang as part of UCI Engineering Senior Design under Prof. Cao in collaboration with UCI Hero Lab.</p>
         </div>
-
         <div>
           <div class="sub">Tools &amp; Components</div>
           <div class="tools" style="margin-top:4px;">
@@ -371,6 +306,18 @@ footer .f-right { text-align: right; white-space: nowrap; }
             <strong>Test:</strong> Oscilloscope, FFT spectrum analysis &nbsp;·&nbsp; <strong>Protocol:</strong> UART · SPI
           </div>
         </div>
-
       </div>
     </div>
+  </div>
+
+  <footer>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">UCI Engineering Senior Design &nbsp;·&nbsp; Samueli School of Engineering<br>Sep 2025 – Mar 2026</div>
+  </footer>
+</div><!-- /page 2 -->
+
+</body>
+</html>

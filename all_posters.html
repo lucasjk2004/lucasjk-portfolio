@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lucas Kang · Engineering Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@media print {
+  @page { size: 8.5in 11in portrait; margin: 0; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+}
+
+:root {
+  --navy:    #0f1e3c;
+  --red:     #c8320a;
+  --gold:    #e8a020;
+  --gold-lt: #f5c050;
+  --teal:    #0e6a6a;
+  --teal-lt: #1a9a9a;
+  --cream:   #f6f4ef;
+  --border:  #d4d0c8;
+  --text:    #1a1814;
+  --dgray:   #4a4642;
+  --orange:  #d4580a;
+}
+
+body { font-family: 'DM Sans', sans-serif; background: #ccc; color: var(--text); margin: 0; padding: 32px 0; }
+
+/* ── PAGE SHELL ── */
+.page {
+  width: 816px; height: 1056px; background: white;
+  margin: 0 auto 32px; display: flex; flex-direction: column;
+  overflow: hidden; position: relative;
+}
+
+/* ── HEADER ── */
+header { background: var(--navy); flex-shrink: 0; padding: 13px 22px 11px; border-bottom: 3px solid var(--teal-lt); }
+header.gold-accent { border-bottom-color: var(--gold); }
+.h-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.h-left { display: flex; align-items: center; gap: 14px; }
+.badge { background: white; color: var(--navy); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 4px; flex-shrink: 0; }
+.badge em { color: var(--teal); font-style: normal; }
+.badge em.red { color: var(--red); }
+header h1 { color: white; font-size: 19px; font-weight: 600; line-height: 1.15; }
+header h1 small { display: block; font-size: 10.5px; font-weight: 300; color: #88b8c8; margin-top: 3px; }
+.h-right { text-align: right; font-size: 10px; color: #6a9ab8; line-height: 1.75; flex-shrink: 0; }
+.h-right strong { color: white; font-size: 11px; }
+.pg-label { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #4a7080; margin-top: 7px; padding-top: 5px; border-top: 1px solid #1e3858; }
+
+/* ── SECTION HEADER ── */
+.sh { font-size: 9px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 5px 12px; flex-shrink: 0; }
+.sh.teal   { background: var(--teal);   color: white; }
+.sh.navy   { background: var(--navy);   color: white; }
+.sh.gold   { background: var(--gold);   color: var(--navy); }
+.sh.dark   { background: #1e2c3a;       color: white; }
+.sh.orange { background: var(--orange); color: white; }
+.sh.red    { background: var(--red);    color: white; }
+.sh.slate  { background: #2c3e50;       color: white; }
+
+/* ── INTRO ── */
+.section-pad { padding: 13px 16px; }
+.tag { font-size: 8.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; font-family: 'DM Mono', monospace; white-space: nowrap; vertical-align: middle; display: inline-block; margin-right: 5px; }
+.tag.nv { background: var(--navy);   color: var(--gold-lt); }
+.tag.tl { background: var(--teal);   color: white; }
+.tag.rd { background: var(--red);    color: white; }
+.tag.or { background: var(--orange); color: white; }
+.tag.sl { background: #2c3e50;       color: #a8c0d8; }
+.td { font-size: 12px; line-height: 1.65; color: #1a1a1a; margin-bottom: 10px; }
+.td:last-child { margin-bottom: 0; }
+.td strong { color: var(--navy); }
+
+/* ── SPECS TABLE ── */
+.specs-wrap { padding: 0 14px 8px; flex-shrink: 0; }
+.specs-wrap table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.specs-wrap thead tr { background: var(--navy); }
+.specs-wrap thead th { color: white; padding: 5px 8px; text-align: left; font-weight: 600; font-size: 10.5px; }
+.specs-wrap tbody tr:nth-child(odd)  { background: #dce0ea; }
+.specs-wrap tbody tr:nth-child(even) { background: var(--cream); }
+.specs-wrap td { padding: 4px 8px; }
+.specs-wrap td:first-child { font-weight: 500; }
+.specs-wrap td:last-child  { color: var(--dgray); font-size: 10px; }
+.val { color: var(--navy); font-weight: 600; font-family: 'DM Mono', monospace; }
+
+/* ── IMAGE CELLS ── */
+.img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; flex-shrink: 0; overflow: hidden; }
+.img-grid-1 { display: grid; grid-template-columns: 1fr; flex-shrink: 0; }
+.img-cell { display: flex; flex-direction: column; border: 1px solid var(--border); }
+.img-cell + .img-cell { border-left: none; }
+.img-wrap { flex: 1; background: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 0; }
+.img-wrap.dark { background: #0d1117; }
+.img-cap { background: rgba(14,106,106,0.88); color: #d0eee8; font-size: 9px; padding: 4px 10px; line-height: 1.4; flex-shrink: 0; border-top: 1.5px solid var(--teal-lt); white-space: normal; overflow: hidden; }
+.img-cap.navy-cap { background: rgba(15,30,60,0.9); color: #c8d8ee; font-size: 10px; padding: 5px 10px; line-height: 1.5; white-space: normal; border-top-color: var(--gold); }
+.img-cap strong { color: #a0eee0; }
+.img-cap.navy-cap strong { color: var(--gold-lt); }
+.img-slot { width: 100%; height: 100%; min-height: 190px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #888; font-size: 9px; text-align: center; padding: 10px; border: 1.5px dashed #c0bdb5; }
+.img-slot.dark { border-color: #2a3248; color: #445; background: #111827; }
+.slot-tag { background: var(--teal); color: white; font-size: 8px; font-weight: 700; padding: 2px 7px; border-radius: 2px; font-family: 'DM Mono', monospace; }
+.slot-tag.gold { background: var(--gold); color: var(--navy); }
+
+/* ── TUBE FURNACE PHOTO LAYOUT ── */
+.photo-area { display: flex; flex-direction: column; flex: 1; min-height: 0; border-top: 1px solid var(--border); }
+.photo-hero { display: flex; flex-shrink: 0; height: calc(56% - 32px); border-bottom: 1px solid var(--border); }
+.photo-hero .img-cell { flex: 1; border-right: 1px solid var(--border); display: flex; flex-direction: column; min-height: 0; border: none; border-right: 1px solid var(--border); }
+.photo-hero .img-cell:last-child { border-right: none; }
+.photo-hero .img-wrap { flex: 1; min-height: 0; overflow: hidden; }
+.photo-hero .img-cap { flex-shrink: 0; height: 22px; display: flex; align-items: center; }
+.photo-gap { height: 8px; background: #e0ddd6; flex-shrink: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.photo-trio { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; }
+.photo-trio .img-cell { border-right: 1px solid var(--border); display: flex; flex-direction: column; min-height: 0; border: none; border-right: 1px solid var(--border); }
+.photo-trio .img-cell:last-child { border-right: none; }
+.photo-trio .img-wrap { flex: 1; min-height: 0; overflow: hidden; }
+.photo-trio .img-cap { flex-shrink: 0; height: 22px; display: flex; align-items: center; }
+
+/* ── DIAGRAM ── */
+.diagram-full { display: flex; flex-direction: column; flex-shrink: 0; height: 340px; border-top: 1px solid var(--border); }
+
+/* ── TWO-COL ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; border-top: 1px solid var(--border); }
+.col-l { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+.col-r { display: flex; flex-direction: column; background: #f0f4f2; overflow: hidden; }
+
+/* ── BULLET LIST ── */
+.bul-list { list-style: none; padding: 0; margin: 0; flex: 1; }
+.bul-list li { font-size: 11px; line-height: 1.6; padding: 4px 14px 4px 20px; position: relative; border-bottom: 1px solid #e8e4dc; }
+.bul-list li:last-child { border-bottom: none; }
+.bul-list li::before { content: '▸'; position: absolute; left: 8px; color: var(--teal); font-size: 9px; top: 7px; }
+.bul-list li strong { color: var(--navy); }
+
+/* ── RESULTS ── */
+.res-inner { padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.sub { font-size: 8.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 2px; }
+.pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.pill { font-size: 9.5px; font-weight: 600; padding: 3px 9px; border-radius: 10px; font-family: 'DM Mono', monospace; }
+.pill.tl { background: var(--teal);   color: white; }
+.pill.nv { background: var(--navy);   color: white; }
+.pill.gd { background: var(--gold);   color: var(--navy); }
+.pill.or { background: var(--orange); color: white; }
+.pill.rd { background: var(--red);    color: white; }
+.tools { font-size: 10.5px; color: #333; line-height: 1.8; }
+.tools strong { color: var(--navy); }
+.ack { font-size: 10.5px; color: #333; line-height: 1.65; }
+
+/* ── VIDEO ── */
+.vid-inner { padding: 12px 14px; display: flex; gap: 12px; flex: 1; }
+.vid-thumb { width: 160px; flex-shrink: 0; background: #161b27; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border: 1.5px dashed #2a3248; align-self: stretch; }
+.play-btn { width: 32px; height: 32px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-btn.red { background: var(--red); }
+.play-btn::after { content: ''; border: 7px solid transparent; border-left: 13px solid white; margin-left: 4px; }
+.vid-note { color: #445; font-size: 9.5px; text-align: center; line-height: 1.4; }
+.timestamps { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.ts-row { display: flex; gap: 8px; align-items: flex-start; }
+.ts { background: var(--navy); color: var(--gold-lt); font-size: 9px; font-weight: 500; font-family: 'DM Mono', monospace; padding: 2px 5px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.ts-text { font-size: 11px; color: #444; line-height: 1.5; }
+
+/* ── DIVIDER ── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; flex-shrink: 0; }
+
+/* ── FOOTER ── */
+footer { background: var(--navy); color: #6a9ab8; font-size: 10px; padding: 5px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-top: 2px solid var(--teal-lt); gap: 12px; }
+footer.gold-footer { border-top-color: var(--gold); }
+footer strong { color: white; }
+footer .f-left { display: flex; flex-direction: column; gap: 1px; }
+footer .f-right { text-align: right; white-space: nowrap; }
+
+/* ── PROJECT SEPARATOR ── */
+.project-sep {
+  width: 816px; margin: 0 auto 32px;
+  background: var(--navy); color: var(--gold-lt);
+  font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 7px 22px; border-top: 3px solid var(--gold);
+  display: flex; align-items: center; gap: 12px;
+}
+.project-sep span { color: #4a6090; font-weight: 400; letter-spacing: 0; font-family: 'DM Sans', sans-serif; font-size: 9px; text-transform: none; }
+</style>
+</head>
+<body>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PROJECT 1 — RepHlux
+     ════════════════════════════════════════════════════════ -->
+
+<!-- REPHLUX PAGE 1 -->
+<div class="page">
+  <header>
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em>UCI</em> Engineering</div>
+        <h1>RepHlux — Wireless Batteryless Acid Reflux Monitor
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; UCI Engineering Senior Design</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2025 – Mar 2026
+      </div>
+    </div>
+    <div class="pg-label">Page 1 of 2 &nbsp;·&nbsp; Introduction &nbsp;·&nbsp; Block Diagram &nbsp;·&nbsp; Hardware &amp; System Overview</div>
+  </header>
+
+  <div class="sh teal">Introduction</div>
+  <div class="section-pad">
+    <div class="td">
+      <span class="tag nv">Objective</span>Acid reflux monitoring typically relies on battery-powered capsules or wired catheter systems, which limit operational lifetime, increase device size, and reduce patient comfort. I worked with a four-person team to design an analog, wireless, batteryless implantable acid reflux monitor prototype powered entirely through inductive coupling at 215 kHz.
+    </div>
+    <div class="td">
+      <span class="tag sl">Contribution</span>Designed the power rectification circuit and batteryless telemetry architecture. Used VCO-based sensor oscillators that encode pH and impedance readings as frequency shifts, to switch a modulation load on the implant. This appears as AM sideband reflected impedance at the external reader belt, enabling passive, battery-free data transmission at <strong>10–80 kHz sidebands</strong> around the 215 kHz carrier.
+    </div>
+    <div class="td">
+      <span class="tag rd">Outcome</span>Achieved <strong>94 mW wireless power transfer</strong> at 15 mm operating depth, full-wave rectified 2.5 V DC supply confirmed on implant, and AM sideband telemetry validated via FFT. ISO 14708 safe-voltage (&lt;2°C heating).
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sh gold">System Block Diagram</div>
+  <div style="flex-shrink:0; border-bottom:1px solid var(--border);">
+    <div class="img-wrap" style="height:200px; background:#fff;">
+      <img src="rephlux/rephlux_block.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="img-slot" style="display:none; min-height:200px;">
+        <div class="slot-tag">rephlux_block.png</div>
+        System block diagram — power belt + implant
+      </div>
+    </div>
+    <div class="img-cap">
+      <strong>Fig. 1</strong>&nbsp; System block diagram — power and reader belt generates 215 kHz carrier; implant rectifies to 2.5 V, sensor VCOs encode pH and impedance into frequency, MUX selects signal, load-modulation switch impresses sidebands on carrier for FFT readback.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sh teal">Hardware &amp; System Overview</div>
+  <div class="img-grid-2" style="flex:1; min-height:0; overflow:hidden;">
+    <div class="img-cell" style="overflow:hidden;">
+      <div class="img-wrap" style="flex:1; min-height:0; overflow:hidden;">
+        <img src="rephlux/rephlux_prototype.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot" style="display:none;">
+          <div class="slot-tag">rephlux_prototype.png</div>
+          Photo of prototype boards
+        </div>
+      </div>
+      <div class="img-cap" style="white-space:normal; line-height:1.4; padding:4px 10px;"><strong>Fig. 2</strong>&nbsp; Prototype boards — implant transceiver (LTC4126EDC rectifier), load modulation switch, dsPIC33CK MCU + FFT board, impedance sensor oscillator, pH sensor VCO, power efficiency VCO.</div>
+    </div>
+    <div class="img-cell" style="border-left:1px solid var(--border); overflow:hidden;">
+      <div class="img-wrap" style="flex:1; background:#fff; min-height:0; overflow:hidden;">
+        <img src="rephlux/rephlux_body.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot" style="display:none;">
+          <div class="slot-tag">rephlux_body.png</div>
+          Body diagram — implant location, inductive link
+        </div>
+      </div>
+      <div class="img-cap" style="white-space:normal; line-height:1.4; padding:4px 10px;"><strong>Fig. 3</strong>&nbsp; System body diagram — implant sits in the esophagus, wirelessly powered by belt coil at 215 kHz. pH and impedance VCOs encode data; sidebands appear in base station FFT.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">UCI Engineering Senior Design &nbsp;·&nbsp; Samueli School of Engineering<br>Sep 2025 – Mar 2026</div>
+  </footer>
+</div><!-- /rephlux page 1 -->
+
+
+<!-- REPHLUX PAGE 2 -->
+<div class="page">
+  <header>
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em>UCI</em> Engineering</div>
+        <h1>RepHlux — Wireless Batteryless Acid Reflux Monitor
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; UCI Engineering Senior Design</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2025 – Mar 2026
+      </div>
+    </div>
+    <div class="pg-label">Page 2 of 2 &nbsp;·&nbsp; Design Specifications &nbsp;·&nbsp; Measurement Results &nbsp;·&nbsp; FFT Telemetry</div>
+  </header>
+
+  <div class="sh navy">Design Specifications</div>
+  <div class="specs-wrap" style="padding-top:8px; padding-bottom:8px;">
+    <table>
+      <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Carrier frequency</td><td><span class="val">215 kHz</span></td><td>Below IEEE C95.1 at 94 mW</td></tr>
+        <tr><td>Output voltage</td><td><span class="val">2.5 V DC</span></td><td>ISO 14708 safe voltage</td></tr>
+        <tr><td>Output power</td><td><span class="val">94 mW</span></td><td>Heating &lt;2°C per ISO 14708</td></tr>
+        <tr><td>Implant power</td><td><span class="val">26 mW</span></td><td>Analog front-end + telemetry</td></tr>
+        <tr><td>Max operating depth</td><td><span class="val">15 mm</span></td><td>Maintained with regulator</td></tr>
+        <tr><td>Telemetry bandwidth</td><td><span class="val">10–80 kHz</span></td><td>Sidebands around 215 kHz carrier</td></tr>
+        <tr><td>Telemetry response</td><td><span class="val">~800 ms</span></td><td>VCO → FFT decode cycle</td></tr>
+        <tr><td>Implant architecture</td><td><span class="val">Fully analog</span></td><td>Miniaturizable to 4 cm</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sh teal">Measurement Results</div>
+  <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); flex-shrink:0; height:268px; border-bottom:1px solid var(--border); overflow:hidden;">
+    <div class="img-cell" style="min-width:0; overflow:hidden; display:flex; flex-direction:column;">
+      <div class="img-wrap" style="flex:1; background:#fff; min-height:0; overflow:hidden;">
+        <img src="rephlux/rephlux_freq_response.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot" style="display:none;">
+          <div class="slot-tag">rephlux_freq_response.png</div>
+          Frequency response — power, pH, impedance sensors
+        </div>
+      </div>
+      <div class="img-cap" style="white-space:normal; line-height:1.4; padding:4px 10px; flex-shrink:0;"><strong>Fig. 4</strong>&nbsp; Frequency response — VCO output vs. sensor input for power (green), pH (blue), and impedance (red).</div>
+    </div>
+    <div class="img-cell" style="min-width:0; border-left:1px solid var(--border); overflow:hidden; display:flex; flex-direction:column;">
+      <div class="img-wrap" style="flex:1; background:#fff; min-height:0; overflow:hidden;">
+        <img src="rephlux/rephlux_power_dist.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot" style="display:none;">
+          <div class="slot-tag">rephlux_power_dist.png</div>
+          Distance vs wireless power
+        </div>
+      </div>
+      <div class="img-cap" style="white-space:normal; line-height:1.4; padding:4px 10px; flex-shrink:0;"><strong>Fig. 5</strong>&nbsp; Distance vs wireless power — 94 mW at 13.5 mm, dropping to ~1 mW at 18.5 mm. Operating range maintained at ≤15 mm.</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="flex:1; min-height:0;">
+    <div class="col-l">
+      <div class="sh teal">Video Demonstration</div>
+      <div class="vid-inner" style="align-items:flex-start; flex:1;">
+        <video src="rephlux/demo.mp4" controls
+          style="width:160px;height:100%;object-fit:cover;border-radius:4px;flex-shrink:0;align-self:stretch;background:#161b27;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        </video>
+        <div class="vid-thumb" style="display:none;">
+          <div class="play-btn"></div>
+          <div class="vid-note">demo.mp4 — place in folder</div>
+        </div>
+        <div class="timestamps">
+          <div class="ts-row"><span class="ts">0:00</span><span class="ts-text">System powered on — belt coil energized at 215 kHz, 2.5 V DC on implant confirmed with multimeter.</span></div>
+          <div class="ts-row"><span class="ts">0:05</span><span class="ts-text">Impedance sensor channel activated — sideband at 189 kHz appears in FFT spectrum alongside 215 kHz center frequency.</span></div>
+          <div class="ts-row"><span class="ts">0:13</span><span class="ts-text">Impedance sensor swept via potentiometer — sideband shifts 189 → 205 → 189 kHz, confirming frequency-encoded impedance telemetry.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-r">
+      <div class="sh dark">Results &amp; Acknowledgements</div>
+      <div class="res-inner">
+        <div>
+          <div class="sub">Validated Results</div>
+          <div class="pills" style="margin-top:5px;">
+            <span class="pill nv">94 mW wireless power</span>
+            <span class="pill tl">2.5 V DC rectified</span>
+            <span class="pill gd">FFT sidebands verified</span>
+            <span class="pill nv">15 mm operating depth</span>
+            <span class="pill tl">ISO 14708 safe voltage</span>
+            <span class="pill gd">AM telemetry confirmed</span>
+          </div>
+        </div>
+        <div>
+          <div class="sub">Acknowledgements</div>
+          <p class="ack">Analog telemetry designed and validated by Lucas Kang as part of UCI Engineering Senior Design under Prof. Cao in collaboration with UCI Hero Lab.</p>
+        </div>
+        <div>
+          <div class="sub">Tools &amp; Components</div>
+          <div class="tools" style="margin-top:4px;">
+            <strong>MCU:</strong> dsPIC33CK64MC105 &nbsp;·&nbsp; <strong>Rectifier:</strong> LTC4126EDC (DC2663A-KIT)<br>
+            <strong>Carrier:</strong> 215 kHz VCO &nbsp;·&nbsp; <strong>Sim:</strong> LTspice<br>
+            <strong>Test:</strong> Oscilloscope, FFT spectrum analysis &nbsp;·&nbsp; <strong>Protocol:</strong> UART · SPI
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">UCI Engineering Senior Design &nbsp;·&nbsp; Samueli School of Engineering<br>Sep 2025 – Mar 2026</div>
+  </footer>
+</div><!-- /rephlux page 2 -->
+
+
+<!-- ════════════════════════════════════════════════════════
+     PROJECT 2 — Formula SAE Safety Shutdown Circuit
+     ════════════════════════════════════════════════════════ -->
+
+<!-- FSAE PAGE 1 -->
+<div class="page">
+  <header class="gold-accent">
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em class="red">UCI</em> Engineering</div>
+        <h1>Formula SAE Safety Shutdown Circuit
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; UCI Formula SAE Electric Vehicle</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2024 – Jun 2025
+      </div>
+    </div>
+    <div class="pg-label">Page 1 of 2 &nbsp;·&nbsp; Introduction &nbsp;·&nbsp; System Block Diagram &nbsp;·&nbsp; Hardware</div>
+  </header>
+
+  <div class="sh red">Introduction</div>
+  <div class="section-pad">
+    <div class="td">
+      <span class="tag nv">Objective</span>The Formula SAE Electric Vehicle requires a fully analog Shutdown Circuit that disables the tractive system within 500 ms in response to insulation (IMD), battery (BMS), and simultaneous hard brake and acceleration (BSPD) fault conditions. This system cannot be re-enabled from inside the cockpit, and must stay disabled until manual reset.
+    </div>
+    <div class="td">
+      <span class="tag sl">Contribution</span>Designed a low-voltage three-stage self-latching relay PCB implementing independent fault paths for BMS, IMD, and BSPD. Each stage uses a self-holding NO contact so any fault latches the relay open regardless of driver input, requiring manual reset at the vehicle per EV.7.2.3.
+    </div>
+    <div class="td">
+      <span class="tag rd">Outcome</span>Achieved <strong>&lt;20 ms</strong> fault response across 50+ bench tests with <strong>100% detection accuracy</strong>. Passed FSAE electrical technical inspection and integrated into the competition vehicle HV safety chain.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sh gold">System Block Diagram</div>
+  <div style="padding:0; flex-shrink:0;">
+    <img src="fsae/block_diagram.png" style="width:100%;display:block;object-fit:contain;"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <div style="display:none; padding:14px 16px 12px;">
+      <svg viewBox="0 0 740 148" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',sans-serif;width:100%;">
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0f1e3c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+          <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#c8320a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        </defs>
+        <rect x="4" y="24" width="108" height="28" rx="3" fill="#eef1f8" stroke="#0f1e3c" stroke-width="0.8"/><text x="58" y="37" text-anchor="middle" font-size="10" font-weight="600" fill="#0f1e3c">BSPD Signal</text><text x="58" y="49" text-anchor="middle" font-size="8.5" fill="#555">Brake + Throttle</text>
+        <rect x="4" y="60" width="108" height="28" rx="3" fill="#eef1f8" stroke="#0f1e3c" stroke-width="0.8"/><text x="58" y="73" text-anchor="middle" font-size="10" font-weight="600" fill="#0f1e3c">IMD Fault</text><text x="58" y="85" text-anchor="middle" font-size="8.5" fill="#555">Insulation monitor</text>
+        <rect x="4" y="96" width="108" height="28" rx="3" fill="#eef1f8" stroke="#0f1e3c" stroke-width="0.8"/><text x="58" y="109" text-anchor="middle" font-size="10" font-weight="600" fill="#0f1e3c">BMS Fault</text><text x="58" y="121" text-anchor="middle" font-size="8.5" fill="#555">Battery mgmt</text>
+        <line x1="112" y1="38" x2="186" y2="56" stroke="#0f1e3c" stroke-width="0.8" marker-end="url(#a)"/>
+        <line x1="112" y1="74" x2="186" y2="74" stroke="#0f1e3c" stroke-width="0.8" marker-end="url(#a)"/>
+        <line x1="112" y1="110" x2="186" y2="92" stroke="#0f1e3c" stroke-width="0.8" marker-end="url(#a)"/>
+        <rect x="188" y="18" width="252" height="112" rx="5" fill="#fff8f0" stroke="#c8320a" stroke-width="1.2"/>
+        <text x="314" y="35" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c8320a">Latchboard PCB</text>
+        <rect x="200" y="44" width="68" height="34" rx="3" fill="#c8320a" stroke="#991100" stroke-width="0.5"/><text x="234" y="60" text-anchor="middle" font-size="9.5" font-weight="600" fill="#fff">Stage 1</text><text x="234" y="72" text-anchor="middle" font-size="8.5" fill="#ffc">BSPD</text>
+        <rect x="283" y="44" width="68" height="34" rx="3" fill="#2266cc" stroke="#1044aa" stroke-width="0.5"/><text x="317" y="60" text-anchor="middle" font-size="9.5" font-weight="600" fill="#fff">Stage 2</text><text x="317" y="72" text-anchor="middle" font-size="8.5" fill="#cce">IMD</text>
+        <rect x="366" y="44" width="68" height="34" rx="3" fill="#1a7040" stroke="#0d4428" stroke-width="0.5"/><text x="400" y="60" text-anchor="middle" font-size="9.5" font-weight="600" fill="#fff">Stage 3</text><text x="400" y="72" text-anchor="middle" font-size="8.5" fill="#cec">BMS</text>
+        <text x="314" y="120" text-anchor="middle" font-size="8.5" fill="#884422" font-style="italic">Self-latching · Manual reset required</text>
+        <line x1="440" y1="74" x2="486" y2="74" stroke="#c8320a" stroke-width="1.6" marker-end="url(#ar)"/>
+        <text x="463" y="67" text-anchor="middle" font-size="9" fill="#c8320a" font-weight="700">TRIP</text>
+        <rect x="488" y="48" width="138" height="54" rx="4" fill="#1a1a2e" stroke="#333" stroke-width="1"/>
+        <text x="557" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#e8a020">HV Contactor</text>
+        <text x="557" y="81" text-anchor="middle" font-size="8.5" fill="#99aac0">Opens LV relay, HV bus</text>
+        <text x="557" y="93" text-anchor="middle" font-size="8.5" fill="#c8320a">&lt;20 ms total</text>
+        <line x1="626" y1="74" x2="668" y2="74" stroke="#c8320a" stroke-width="1.6" marker-end="url(#ar)"/>
+        <rect x="670" y="50" width="66" height="48" rx="4" fill="#c8320a" stroke="#991100" stroke-width="0.9"/>
+        <text x="703" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">HV</text>
+        <text x="703" y="86" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">OFF</text>
+      </svg>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sh red">Hardware</div>
+  <div class="img-grid-2" style="flex:1; min-height:0;">
+    <div class="img-cell">
+      <div class="img-wrap" style="flex:1;">
+        <img src="fsae/Latchboard_PCB_Render.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot dark" style="display:none;">
+          <div class="slot-tag gold">Latchboard_PCB_Render.png</div>
+          PCB render
+        </div>
+      </div>
+      <div class="img-cap navy-cap">
+        <strong>Fig. 1</strong> Latchboard PCB — three self-latching relay stages (BMS, IMD, BSPD), debug LEDs, manual reset buttons, G6B relays 5A/12V.
+      </div>
+    </div>
+    <div class="img-cell">
+      <div class="img-wrap" style="flex:1;">
+        <img src="fsae/DPST_Topology.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot dark" style="display:none;">
+          <div class="slot-tag gold">DPST_Topology.png</div>
+          Self-latching DPST schematic
+        </div>
+      </div>
+      <div class="img-cap navy-cap">
+        <strong>Fig. 2</strong> Self-latching DPST topology — SW1 closes NO relay contacts and holds until fault signal trips.
+      </div>
+    </div>
+  </div>
+
+  <footer class="gold-footer">
+    <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; (650) 666-9660 &nbsp;·&nbsp; github.com/lucasjk2004</div>
+    <div>UCI Formula SAE Electric Vehicle &nbsp;·&nbsp; Samueli School of Engineering &nbsp;·&nbsp; Sep 2024 – Jun 2025</div>
+  </footer>
+</div><!-- /fsae page 1 -->
+
+
+<!-- FSAE PAGE 2 -->
+<div class="page">
+  <header class="gold-accent">
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em class="red">UCI</em> Engineering</div>
+        <h1>Formula SAE Safety Shutdown Circuit
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; UCI Formula SAE Electric Vehicle</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2024 – Jun 2025
+      </div>
+    </div>
+    <div class="pg-label">Page 2 of 2 &nbsp;·&nbsp; Relay Timing &nbsp;·&nbsp; Design Specifications &nbsp;·&nbsp; Results</div>
+  </header>
+
+  <div class="sh navy">Relay Dropout Timing</div>
+  <div class="img-grid-2" style="height:390px; flex-shrink:0;">
+    <div class="img-cell">
+      <div class="img-wrap" style="flex:1; background:#0d1117;">
+        <img src="fsae/relay_dropout.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-slot dark" style="display:none;">
+          <div class="slot-tag gold">relay_dropout.png</div>
+          Relay dropout timing plot
+        </div>
+      </div>
+      <div class="img-cap navy-cap">
+        <strong>Fig. 3</strong> Relay dropout timing — supply rail collapses at de-energization while NO contact holds for ~16 ms, capturing G6B-2214P-US mechanical dropout delay.
+      </div>
+    </div>
+    <div class="img-cell" style="background: var(--cream);">
+      <div class="sh navy" style="margin:0;">Design Specifications</div>
+      <div class="specs-wrap" style="padding: 10px 14px;">
+        <table>
+          <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Shutdown response</td><td><span class="val">&lt;20 ms</span></td><td>Fault signal → HV open</td></tr>
+            <tr><td>Fault detection rate</td><td><span class="val">100%</span></td><td>50+ bench tests</td></tr>
+            <tr><td>Operating voltage</td><td><span class="val">12V DC</span></td><td>LV supply</td></tr>
+            <tr><td>Relay contact rating</td><td><span class="val">5A / 125VDC</span></td><td>G6B-2214P-US BC12</td></tr>
+            <tr><td>Fault stages</td><td><span class="val">3 independent</span></td><td>BSPD · IMD · BMS</td></tr>
+            <tr><td>Latch behavior</td><td><span class="val">NO self-hold</span></td><td>Manual reset only</td></tr>
+            <tr><td>BSPD threshold</td><td><span class="val">&lt;0V and &gt;4.5V</span></td><td>FSAE EV.7.7</td></tr>
+            <tr><td>PCB</td><td><span class="val">2-layer FR4</span></td><td>KiCad, JLCPCB</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col" style="flex:1; min-height:0; border-top:1px solid var(--border);">
+    <div class="col-l">
+      <div class="sh red">Video Demonstration</div>
+      <div class="vid-inner" style="align-items:flex-start; flex:1;">
+        <video src="fsae/demo.mp4" controls
+          style="width:160px;height:100%;flex-shrink:0;align-self:stretch;border-radius:4px;background:#161b27;object-fit:cover;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        </video>
+        <div class="vid-thumb" style="display:none;">
+          <div class="play-btn red"></div>
+          <div class="vid-note">demo.mp4 — place in folder</div>
+        </div>
+        <div class="timestamps">
+          <div class="ts-row"><span class="ts">0:03</span><span class="ts-text">Board powers on. All debug LEDs illuminate red, indicating nominal state.</span></div>
+          <div class="ts-row"><span class="ts">0:07</span><span class="ts-text">IMD fault simulated. Relay latches open; IMD indicator LED isolates the fault to that stage.</span></div>
+          <div class="ts-row"><span class="ts">0:11</span><span class="ts-text">Manual reset triggered, closing the contactor and restoring the shutdown circuit per EV.7.2.3.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-r">
+      <div class="sh dark">Results &amp; Acknowledgements</div>
+      <div class="res-inner">
+        <div>
+          <div class="sub">Validated Results</div>
+          <div class="pills" style="margin-top:5px;">
+            <span class="pill rd">&lt;20 ms shutdown</span>
+            <span class="pill nv">50+ bench tests</span>
+            <span class="pill gd">100% fault detection</span>
+            <span class="pill nv">FSAE inspection passed</span>
+            <span class="pill rd">3-stage isolation</span>
+            <span class="pill nv">HV chain integrated</span>
+          </div>
+        </div>
+        <p class="ack">Designed, fabricated, and validated by Lucas Kang as part of UCI Formula SAE's electrical team. PCB manufactured via JLCPCB. Reviewed against FSAE 2025 rules EV.7.1–EV.7.9.</p>
+        <div>
+          <div class="sub">Tools &amp; Components</div>
+          <div class="tools" style="margin-top:4px;">
+            <strong>EDA:</strong> KiCad &nbsp;·&nbsp; <strong>Sim:</strong> LTspice &nbsp;·&nbsp; <strong>ICs:</strong> G6B-2214P-US relay, LM393 comparator<br>
+            <strong>Test:</strong> Rigol DS1054Z oscilloscope &nbsp;·&nbsp; <strong>Mfg:</strong> JLCPCB 2-layer FR4
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="gold-footer">
+    <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk@uci.edu &nbsp;·&nbsp; (650) 666-9660 &nbsp;·&nbsp; github.com/lucasjk2004</div>
+    <div>UCI Formula SAE Electric Vehicle &nbsp;·&nbsp; Samueli School of Engineering &nbsp;·&nbsp; Sep 2024 – Jun 2025</div>
+  </footer>
+</div><!-- /fsae page 2 -->
+
+
+<!-- ════════════════════════════════════════════════════════
+     PROJECT 3 — 1200 °C Tube Furnace
+     ════════════════════════════════════════════════════════ -->
+
+<!-- FURNACE PAGE 1 -->
+<div class="page">
+  <header>
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em>UCI</em> Engineering</div>
+        <h1>1200 °C Tube Furnace for Semiconductor Oxidation
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; Hacker Fab / UCI Student-Led Semiconductor Lab</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2024 – Jun 2025
+      </div>
+    </div>
+    <div class="pg-label">Page 1 of 2 &nbsp;·&nbsp; Introduction &nbsp;·&nbsp; Hardware Gallery</div>
+  </header>
+
+  <div class="sh teal">Introduction</div>
+  <div class="section-pad">
+    <div class="td">
+      <span class="tag nv">Objective</span>Commercial tube furnaces capable of 1200 °C silicon oxidation cost upward of $3,000 and are unavailable in most student lab settings. As part of the UCI Hacker Fab initiative, I co-built a fully programmable, low-cost alumina-tube furnace enabling student-accessible semiconductor fabrication from scratch.
+    </div>
+    <div class="td">
+      <span class="tag sl">Contribution</span>Designed the <strong>PID temperature control PCB</strong> around an ATmega8A MCU with K-type thermocouple feedback, driving a high-voltage resistive heating element through a solid-state relay. Implemented HV isolation with a high-current fuse and alumina ceramic insulation for safe operation.
+    </div>
+    <div class="td">
+      <span class="tag rd">Outcome</span>Achieved <strong>ramp rates up to 20 °C/min</strong> and sustained <strong>±2 °C accuracy at 1200 °C</strong>. Verified successful silicon wafer thermal oxidation via microscope inspection of oxide film. Total system cost: <strong>under $500</strong> versus $3,000+ commercial alternatives.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sh gold">Hardware Gallery</div>
+  <div class="photo-area">
+    <div class="photo-hero">
+      <div class="img-cell" style="flex:1.15;">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace/furnace_cad.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_cad.png</div>
+            CAD model of furnace
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 1</strong>&nbsp; CAD model — clamshell alumina-tube furnace with ceramic end-caps.</div>
+      </div>
+      <div class="img-cell" style="flex:1;">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace/furnace_glowing.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_glowing.png</div>
+            Tube at operating temp
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 2</strong>&nbsp; Tube at 1200 °C — silicon wafer sample loaded inside the alumina tube.</div>
+      </div>
+    </div>
+    <div class="photo-gap"></div>
+    <div class="photo-trio">
+      <div class="img-cell">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace/furnace_build.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_build.png</div>
+            Build / team photo
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 3</strong>&nbsp; Build — team wiring PID control PCB and SSR assembly.</div>
+      </div>
+      <div class="img-cell">
+        <div class="img-wrap" style="background:#f5f5f5;">
+          <img src="furnace/furnace_oxide.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="img-slot" style="display:none;">
+            <div class="slot-tag">furnace_oxide.png</div>
+            Microscope SiO₂ film
+          </div>
+        </div>
+        <div class="img-cap"><strong>Fig. 4</strong>&nbsp; Microscope — thermally grown SiO₂ film on silicon wafer.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">Hacker Fab / UCI Student-Led Semiconductor Lab<br>Samueli School of Engineering &nbsp;·&nbsp; Sep 2024 – Jun 2025</div>
+  </footer>
+</div><!-- /furnace page 1 -->
+
+
+<!-- FURNACE PAGE 2 -->
+<div class="page">
+  <header>
+    <div class="h-top">
+      <div class="h-left">
+        <div class="badge"><em>UCI</em> Engineering</div>
+        <h1>1200 °C Tube Furnace for Semiconductor Oxidation
+          <small>Lucas Kang &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; Hacker Fab / UCI Student-Led Semiconductor Lab</small>
+        </h1>
+      </div>
+      <div class="h-right">
+        <strong>University of California, Irvine</strong><br>
+        B.S. Electrical Engineering &amp; B.A. Music<br>
+        Sep 2024 – Jun 2025
+      </div>
+    </div>
+    <div class="pg-label">Page 2 of 2 &nbsp;·&nbsp; System Block Diagram &nbsp;·&nbsp; Design Specifications &nbsp;·&nbsp; Results</div>
+  </header>
+
+  <div class="sh orange">System Block Diagram</div>
+  <div class="diagram-full">
+    <div class="img-wrap" style="flex:1; background:#fff;">
+      <img src="furnace/furnace_diagram.png" style="width:100%;height:100%;object-fit:contain;display:block;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="img-slot" style="display:none;">
+        <div class="slot-tag">furnace_diagram.png</div>
+        System block diagram
+      </div>
+    </div>
+    <div class="img-cap">
+      <strong>Fig. 5</strong>&nbsp; PID control loop — Variac adjusts input voltage; HV fuse protects the line; SSR switches AC to heating element; K-type thermocouple feeds back to ATmega8A MCU; LCD displays setpoint and measured temperature.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="two-col">
+    <div class="col-l">
+      <div class="sh navy">Design Specifications</div>
+      <div class="specs-wrap" style="padding-top:8px;">
+        <table>
+          <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Max temperature</td><td><span class="val">1200 °C</span></td><td>Alumina tube rated</td></tr>
+            <tr><td>Temp accuracy</td><td><span class="val">±2 °C</span></td><td>K-type thermocouple</td></tr>
+            <tr><td>Ramp rate</td><td><span class="val">20 °C/min</span></td><td>PID controlled</td></tr>
+            <tr><td>MCU</td><td><span class="val">ATmega8A</span></td><td>C++ firmware, PID loop</td></tr>
+            <tr><td>HV isolation</td><td><span class="val">SSR + fuse</span></td><td>Alumina ceramic insulation</td></tr>
+            <tr><td>Total cost</td><td><span class="val">&lt;$500</span></td><td>vs. $3,000+ commercial</td></tr>
+            <tr><td>Tube material</td><td><span class="val">Alumina</span></td><td>Inert to O₂ at 1200 °C</td></tr>
+            <tr><td>Control firmware</td><td><span class="val">C++ / AVR</span></td><td>ATmega8A, custom PID</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <hr class="divider" style="margin-top:4px;">
+      <div class="sh teal">Engineering Contributions</div>
+      <ul class="bul-list">
+        <li>Built a low-cost, programmable alumina-tube furnace for semiconductor oxidation, enabling <strong>student-accessible fabrication</strong> at UCI Hacker Fab</li>
+        <li>Designed <strong>PID temperature control PCB</strong> using an ATmega8A MCU with thermocouple feedback driving a HV heating element</li>
+        <li>Achieved ramp rates up to <strong>20 °C/min</strong> and maintained <strong>±2 °C accuracy</strong> up to 1200 °C</li>
+        <li>Implemented HV isolation using <strong>solid-state relay</strong>, high-current fuse, and alumina ceramic insulation</li>
+        <li>Delivered complete system under <strong>$500</strong> vs. $3,000+ commercial alternatives; verified silicon wafer oxidation via microscope</li>
+        <li>Designed and laid out custom PCB in <strong>KiCad</strong>; validated control loop behavior in <strong>LTspice</strong> prior to hardware build</li>
+      </ul>
+    </div>
+    <div class="col-r">
+      <div class="sh dark">Results &amp; Acknowledgements</div>
+      <div class="res-inner">
+        <div>
+          <div class="sub">Validated Results</div>
+          <div class="pills" style="margin-top:5px;">
+            <span class="pill nv">±2 °C at 1200 °C</span>
+            <span class="pill tl">20 °C/min ramp</span>
+            <span class="pill or">SiO₂ film verified</span>
+            <span class="pill nv">HV SSR isolation</span>
+            <span class="pill gd">&lt;$500 total cost</span>
+            <span class="pill tl">Wet/dry oxidation</span>
+          </div>
+        </div>
+        <div>
+          <div class="sub">Tools &amp; Components</div>
+          <div class="tools" style="margin-top:4px;">
+            <strong>MCU:</strong> ATmega8A (C++ firmware, PID loop)<br>
+            <strong>PCB design:</strong> KiCad &nbsp;·&nbsp; <strong>Simulation:</strong> LTspice<br>
+            <strong>HV switch:</strong> Solid-state relay (SSR) + high-current fuse<br>
+            <strong>Sensor:</strong> K-type thermocouple &nbsp;·&nbsp; <strong>Tube:</strong> Alumina ceramic<br>
+            <strong>Voltage adj.:</strong> Variac &nbsp;·&nbsp; <strong>Display:</strong> LCD (setpoint + measured)
+          </div>
+        </div>
+        <div>
+          <div class="sub">Acknowledgements</div>
+          <p class="ack">Built as part of the UCI Hacker Fab student-led semiconductor lab initiative. Hardware design, firmware, and PCB layout by Lucas Kang in collaboration with Hacker Fab teammates, Sep 2024 – Jun 2025.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="f-left">
+      <div><strong>Lucas Kang</strong> &nbsp;·&nbsp; lucasjk2004@gmail.com &nbsp;·&nbsp; (650) 666-9660</div>
+      <div>github.com/lucasjk2004</div>
+    </div>
+    <div class="f-right">Hacker Fab / UCI Student-Led Semiconductor Lab<br>Samueli School of Engineering &nbsp;·&nbsp; Sep 2024 – Jun 2025</div>
+  </footer>
+</div><!-- /furnace page 2 -->
+
+
+</body>
+</html>
