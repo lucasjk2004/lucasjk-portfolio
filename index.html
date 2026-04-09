@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Kang — Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #0a1628;
+  --navy2:   #0f1e3c;
+  --navy3:   #1a2f5a;
+  --red:     #c8320a;
+  --gold:    #e8a020;
+  --gold-lt: #f5c050;
+  --white:   #f0ece4;
+  --dim:     #8fa8c8;
+  --border:  rgba(255,255,255,0.07);
+  --mono:    'DM Mono', monospace;
+  --sans:    'DM Sans', sans-serif;
+  --serif:   'Playfair Display', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── GRID TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(10,22,40,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--dim); }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 80px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -1px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.hero h1 .accent { color: var(--gold); }
+.hero-sub {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 700;
+  color: var(--dim);
+  margin-bottom: 32px;
+  font-style: italic;
+}
+.hero-body {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #8fa8c8;
+  max-width: 560px;
+  margin-bottom: 48px;
+}
+.hero-body strong { color: var(--white); font-weight: 500; }
+
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 28px;
+  border-radius: 3px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy2);
+}
+.btn-primary:hover { background: var(--gold-lt); }
+.btn-secondary {
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white);
+}
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── STATS ROW ── */
+.stats {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(15,30,60,0.4);
+}
+.stat {
+  padding: 28px 40px;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-val {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ── SECTION ── */
+.section {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 80px;
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.skill-card {
+  background: rgba(15,30,60,0.5);
+  padding: 28px 28px;
+  transition: background 0.2s;
+}
+.skill-card:hover { background: rgba(26,47,90,0.6); }
+.skill-card-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.skill-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.skill-card p {
+  font-size: 12.5px;
+  color: var(--dim);
+  line-height: 1.65;
+}
+
+/* ── PROJECTS PREVIEW ── */
+.projects-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.proj-card {
+  background: rgba(15,30,60,0.5);
+  padding: 36px 36px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.proj-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.proj-card:hover { background: rgba(26,47,90,0.6); }
+.proj-card:hover::after { transform: scaleX(1); }
+.proj-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.proj-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.2;
+}
+.proj-card p {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.65;
+  flex: 1;
+}
+.proj-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.proj-pill {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 2px 8px;
+  border: 1px solid rgba(232,160,32,0.3);
+  color: var(--gold);
+  border-radius: 2px;
+}
+.proj-arrow {
+  font-size: 18px;
+  color: var(--gold);
+  align-self: flex-end;
+  margin-top: 8px;
+}
+
+/* ── CONTACT ── */
+.contact-row {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contact-item-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.contact-item a, .contact-item span {
+  font-size: 14px;
+  color: var(--white);
+  text-decoration: none;
+}
+.contact-item a:hover { color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 20px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(143,168,200,0.5);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow { animation: fadeUp 0.6s ease both; }
+.hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
+.hero-sub     { animation: fadeUp 0.6s 0.2s ease both; }
+.hero-body    { animation: fadeUp 0.6s 0.3s ease both; }
+.hero-ctas    { animation: fadeUp 0.6s 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LK<span>.EE</span></a>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="fsae/index.html">FSAE</a>
+    <a href="mailto:lucasjk2004@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">EE &amp; Music · UC Irvine · Class of 2027</div>
+  <h1>Lucas <span class="accent">Kang</span></h1>
+  <div class="hero-sub">Electrical Engineer</div>
+  <p class="hero-body">
+    Building hardware at the intersection of <strong>embedded systems</strong>, <strong>PCB design</strong>, and <strong>analog circuits</strong>. Double major in EE and Music at UCI — Dean's Honor List, 3.3 GPA.
+  </p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="projects.html">View Projects →</a>
+    <a class="btn btn-secondary" href="mailto:lucasjk2004@gmail.com">lucasjk2004@gmail.com</a>
+    <a class="btn btn-secondary" href="https://github.com/lucasjk2004" target="_blank">GitHub</a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section">
+  <div class="section-label">Areas of focus</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-label">Hardware</div>
+      <h3>PCB Design &amp; Layout</h3>
+      <p>KiCad, Altium. Multi-stage relay logic, sensor front-ends, power management. JLCPCB fabrication.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Simulation</div>
+      <h3>Circuit Analysis</h3>
+      <p>LTspice for comparator thresholds, relay coil timing, inductive coupling, and power transfer modeling.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Embedded</div>
+      <h3>Firmware &amp; DSP</h3>
+      <p>C/C++ on ESP32, ATmega8A, dsPIC33CK. PID control, UWB ranging, SPI/UART, FFT-based telemetry.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">RF &amp; Wireless</div>
+      <h3>Inductive &amp; UWB Systems</h3>
+      <p>Inductive coupling at 215 kHz, AM sideband telemetry, UWB DS-TWR ranging with DWM3000.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Lab</div>
+      <h3>Test &amp; Validation</h3>
+      <p>Oscilloscope, network analyzer, signal generator, DMM. Rigol DS1054Z. Soldering and rework.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Tools</div>
+      <h3>Software Stack</h3>
+      <p>Python, MATLAB, C/C++, Git. KiCad · LTspice · Cadence ADE · Max/MSP · Web Audio API.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS PREVIEW -->
+<section class="section" style="padding-top:0;">
+  <div class="section-label">Selected projects</div>
+  <div class="projects-preview">
+
+    <a class="proj-card" href="projects.html#fsae">
+      <div class="proj-tag">Formula SAE · Sep 2024 – Jun 2025</div>
+      <h3>Safety Shutdown Circuit</h3>
+      <p>Self-latching relay PCB implementing three independent fault paths — BMS, IMD, BSPD — in the FSAE EV.7 Shutdown Circuit series loop. &lt;20 ms contact response, 100% detection accuracy, passed competition inspection.</p>
+      <div class="proj-pills">
+        <span class="proj-pill">KiCad</span>
+        <span class="proj-pill">LTspice</span>
+        <span class="proj-pill">Relay Logic</span>
+        <span class="proj-pill">FSAE EV.7</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="projects.html#rephlux">
+      <div class="proj-tag">Senior Design · Sep 2025 – Mar 2026</div>
+      <h3>RepHlux</h3>
+      <p>Wireless, batteryless acid reflux monitor. Inductive power at 215 kHz, VCO load-modulation telemetry, full-wave rectification. 2.5 V wireless power at 10 cm depth in tissue mockup.</p>
+      <div class="proj-pills">
+        <span class="proj-pill">Inductive Coupling</span>
+        <span class="proj-pill">AM Telemetry</span>
+        <span class="proj-pill">dsPIC33CK</span>
+        <span class="proj-pill">LTC4126</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="projects.html#chordinates">
+      <div class="proj-tag">E-SONIC Competition · Dec 2025 – Apr 2026</div>
+      <h3>Chordinates</h3>
+      <p>UWB-based spatial musical instrument mapping real-time 3D position to synthesis parameters. ~10 cm accuracy, $1,500 funding awarded, top-8 E-SONIC proposal.</p>
+      <div class="proj-pills">
+        <span class="proj-pill">UWB / DWM3000</span>
+        <span class="proj-pill">ESP32</span>
+        <span class="proj-pill">Max/MSP</span>
+        <span class="proj-pill">DS-TWR</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="projects.html#furnace">
+      <div class="proj-tag">Hacker Fab · Sep 2024 – Jun 2025</div>
+      <h3>1200°C Tube Furnace</h3>
+      <p>Programmable alumina-tube furnace for semiconductor oxidation. PID temperature control, ±2°C accuracy, 20°C/min ramp rate. Delivered under $500 vs $3,000+ commercial alternatives.</p>
+      <div class="proj-pills">
+        <span class="proj-pill">ATmega8A</span>
+        <span class="proj-pill">PID Control</span>
+        <span class="proj-pill">HV Isolation</span>
+        <span class="proj-pill">KiCad</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" style="padding-top:0; padding-bottom:60px;">
+  <div class="section-label">Get in touch</div>
+  <div class="contact-row">
+    <div class="contact-item">
+      <span class="contact-item-label">Email</span>
+      <a href="mailto:lucasjk2004@gmail.com">lucasjk2004@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label">Phone</span>
+      <span>(650) 666-9660</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label">GitHub</span>
+      <a href="https://github.com/lucasjk2004" target="_blank">github.com/lucasjk2004</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label">Location</span>
+      <span>Irvine, CA</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Lucas Kang · EE &amp; Music · UC Irvine</span>
+  <span>lucasjk2004.github.io/lucasjk-portfolio</span>
+</footer>
+
+</body>
+</html>

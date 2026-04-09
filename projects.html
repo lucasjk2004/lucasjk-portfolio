@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Lucas Kang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #0a1628;
+  --navy2:   #0f1e3c;
+  --navy3:   #1a2f5a;
+  --red:     #c8320a;
+  --gold:    #e8a020;
+  --gold-lt: #f5c050;
+  --cream:   #f6f4ef;
+  --white:   #f0ece4;
+  --dim:     #8fa8c8;
+  --border:  rgba(255,255,255,0.07);
+  --border-solid: #1e3060;
+  --mono:    'DM Mono', monospace;
+  --sans:    'DM Sans', sans-serif;
+  --serif:   'Playfair Display', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(10,22,40,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--dim); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  z-index: 1;
+  padding: 80px 80px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+.page-header-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.page-header-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+.page-header h1 {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.page-header p {
+  font-size: 15px;
+  color: var(--dim);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ── PROJECT FILTER ── */
+.filter-bar {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 80px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+.filter-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--border-solid);
+  color: var(--dim);
+  background: transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(232,160,32,0.06);
+}
+
+/* ── PROJECT ENTRY ── */
+.projects-list {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 80px 80px;
+}
+
+.project {
+  border-bottom: 1px solid var(--border);
+  padding: 64px 0;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.project:last-child { border-bottom: none; }
+
+/* left sidebar */
+.proj-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 80px;
+}
+.proj-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(143,168,200,0.3);
+  letter-spacing: 1px;
+}
+.proj-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+.proj-org {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.proj-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dim);
+}
+.proj-tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.proj-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 3px 8px;
+  border: 1px solid rgba(232,160,32,0.25);
+  color: var(--gold);
+  border-radius: 2px;
+}
+.proj-links { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.proj-link {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  color: var(--dim);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.proj-link:hover { color: var(--gold); }
+.proj-link::before { content: '→'; font-size: 12px; }
+
+/* right content */
+.proj-content { display: flex; flex-direction: column; gap: 32px; }
+
+.proj-section-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(143,168,200,0.5);
+  margin-bottom: 10px;
+}
+
+.proj-summary {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #b0c4d8;
+}
+.proj-summary strong { color: var(--white); font-weight: 500; }
+
+/* result pills row */
+.result-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.result-pill {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 2px;
+}
+.result-pill.red  { background: rgba(200,50,10,0.15); color: #f08070; border: 1px solid rgba(200,50,10,0.3); }
+.result-pill.gold { background: rgba(232,160,32,0.12); color: var(--gold-lt); border: 1px solid rgba(232,160,32,0.3); }
+.result-pill.blue { background: rgba(34,102,204,0.12); color: #80a8e8; border: 1px solid rgba(34,102,204,0.3); }
+
+/* specs mini-table */
+.specs-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border-solid);
+}
+.spec-row {
+  background: rgba(15,30,60,0.5);
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.spec-key {
+  font-size: 11px;
+  color: var(--dim);
+  flex-shrink: 0;
+}
+.spec-val {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--white);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* image placeholder / real image */
+.proj-img {
+  width: 100%;
+  border: 1px solid var(--border-solid);
+  border-radius: 2px;
+  display: block;
+  background: rgba(15,30,60,0.5);
+}
+.img-placeholder {
+  width: 100%;
+  height: 220px;
+  border: 1px dashed var(--border-solid);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: rgba(143,168,200,0.3);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* poster link card */
+.poster-card {
+  border: 1px solid var(--border-solid);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.poster-card:hover {
+  border-color: var(--gold);
+  background: rgba(232,160,32,0.04);
+}
+.poster-card-left { display: flex; flex-direction: column; gap: 4px; }
+.poster-card-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.poster-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+}
+.poster-card-arrow {
+  font-size: 20px;
+  color: var(--gold);
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 20px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(143,168,200,0.4);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LK<span>.EE</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="mailto:lucasjk2004@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-eyebrow">Engineering Portfolio</div>
+  <h1>Projects</h1>
+  <p>Hardware-focused work spanning PCB design, embedded systems, RF &amp; inductive power, and instrumentation. All projects designed, built, and validated from scratch.</p>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+  <button class="filter-btn" onclick="filterProjects('pcb', this)">PCB Design</button>
+  <button class="filter-btn" onclick="filterProjects('embedded', this)">Embedded</button>
+  <button class="filter-btn" onclick="filterProjects('rf', this)">RF / Wireless</button>
+  <button class="filter-btn" onclick="filterProjects('competition', this)">Competition</button>
+</div>
+
+<div class="projects-list">
+
+  <!-- ══════════════════════════════════════════════
+       PROJECT 1 — FSAE SHUTDOWN CIRCUIT
+       ══════════════════════════════════════════════ -->
+  <div class="project" id="fsae" data-tags="pcb embedded competition">
+
+    <div class="proj-sidebar">
+      <div class="proj-number">01 / 04</div>
+      <div class="proj-title">Safety Shutdown Circuit</div>
+      <div class="proj-org">UCI Formula SAE</div>
+      <div class="proj-date">Sep 2024 – Jun 2025</div>
+      <div class="proj-tag-list">
+        <span class="proj-tag">KiCad</span>
+        <span class="proj-tag">LTspice</span>
+        <span class="proj-tag">Relay Logic</span>
+        <span class="proj-tag">FSAE EV.7</span>
+        <span class="proj-tag">JLCPCB</span>
+      </div>
+      <div class="proj-links">
+        <a class="proj-link" href="fsae/index.html">Full poster (2 pages)</a>
+      </div>
+    </div>
+
+    <div class="proj-content">
+
+      <div>
+        <div class="proj-section-label">Overview</div>
+        <p class="proj-summary">
+          The FSAE EV.7 Shutdown Circuit is a <strong>series interlock loop</strong> — any one of eight independent fault sources can open the loop and kill the tractive system. This project covers two of those segments: the <strong>Latchboard PCB</strong> and the <strong>BSPD comparator circuit</strong>, both designed from scratch.
+        </p>
+        <p class="proj-summary" style="margin-top:12px;">
+          The latchboard implements three independent self-latching relay stages (BMS, IMD, BSPD). Once any stage trips, the relay <strong>latches open regardless of driver input</strong> and requires a person to physically reset it at the vehicle — satisfying EV.7.2.3. The BSPD comparator detects simultaneous hard brake and throttle, flagging sensor failure or stuck pedal per EV.7.7.
+        </p>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Results</div>
+        <div class="result-row">
+          <span class="result-pill red">&lt;20 ms shutdown</span>
+          <span class="result-pill gold">100% fault detection</span>
+          <span class="result-pill blue">50+ bench tests</span>
+          <span class="result-pill gold">FSAE inspection passed</span>
+          <span class="result-pill red">3-stage isolation</span>
+          <span class="result-pill blue">HV chain integrated</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Key Specifications</div>
+        <div class="specs-mini">
+          <div class="spec-row"><span class="spec-key">Shutdown response</span><span class="spec-val">&lt;20 ms</span></div>
+          <div class="spec-row"><span class="spec-key">Operating voltage</span><span class="spec-val">12V DC</span></div>
+          <div class="spec-row"><span class="spec-key">Relay contact rating</span><span class="spec-val">5A / 125VDC</span></div>
+          <div class="spec-row"><span class="spec-key">Relay part</span><span class="spec-val">G6B-2214P-US BC12</span></div>
+          <div class="spec-row"><span class="spec-key">Fault stages</span><span class="spec-val">3 independent</span></div>
+          <div class="spec-row"><span class="spec-key">Latch behavior</span><span class="spec-val">NO self-hold</span></div>
+          <div class="spec-row"><span class="spec-key">BSPD threshold</span><span class="spec-val">&lt;0V and &gt;4.5V</span></div>
+          <div class="spec-row"><span class="spec-key">PCB</span><span class="spec-val">2-layer FR4, JLCPCB</span></div>
+        </div>
+      </div>
+
+      <!-- PCB render image — place Latchboard_PCB_Render.png in root folder -->
+      <div>
+        <div class="proj-section-label">Hardware</div>
+        <img class="proj-img" src="fsae/Latchboard_PCB_Render.png" alt="Latchboard PCB 3D render"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="img-placeholder" style="display:none;">Latchboard_PCB_Render.png — place in fsae/ folder</div>
+      </div>
+
+      <a class="poster-card" href="fsae/index.html">
+        <div class="poster-card-left">
+          <span class="poster-card-label">Full technical poster</span>
+          <span class="poster-card-title">Formula SAE Safety Shutdown Circuit — 2-page PDF-ready poster</span>
+        </div>
+        <span class="poster-card-arrow">→</span>
+      </a>
+
+    </div>
+  </div><!-- /fsae -->
+
+
+  <!-- ══════════════════════════════════════════════
+       PROJECT 2 — REPHLUX
+       ══════════════════════════════════════════════ -->
+  <div class="project" id="rephlux" data-tags="pcb embedded rf">
+
+    <div class="proj-sidebar">
+      <div class="proj-number">02 / 04</div>
+      <div class="proj-title">RepHlux</div>
+      <div class="proj-org">UCI Senior Design</div>
+      <div class="proj-date">Sep 2025 – Mar 2026</div>
+      <div class="proj-tag-list">
+        <span class="proj-tag">215 kHz Inductive</span>
+        <span class="proj-tag">AM Telemetry</span>
+        <span class="proj-tag">dsPIC33CK</span>
+        <span class="proj-tag">LTC4126EDC</span>
+        <span class="proj-tag">KiCad</span>
+      </div>
+    </div>
+
+    <div class="proj-content">
+
+      <div>
+        <div class="proj-section-label">Overview</div>
+        <p class="proj-summary">
+          RepHlux is a <strong>wireless, batteryless acid reflux monitor</strong> designed for continuous esophageal pH and impedance sensing without the bulk of a battery or wired connection. The implant is powered entirely through <strong>inductive coupling at 215 kHz</strong> from an external belt reader.
+        </p>
+        <p class="proj-summary" style="margin-top:12px;">
+          Sensor data (pH, impedance, power) is encoded into <strong>VCO load-modulated frequency signals</strong> in the 0–50 kHz band, which appear as amplitude modulation sidebands on the carrier and are detected by FFT on the reader DSP. The fully analog implant architecture miniaturizes to 4 cm, meeting ISO 14708 voltage and power limits.
+        </p>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Results</div>
+        <div class="result-row">
+          <span class="result-pill gold">2.5V wireless power at 10 cm</span>
+          <span class="result-pill blue">~800 ms telemetry response</span>
+          <span class="result-pill red">94 mW output power</span>
+          <span class="result-pill gold">215 kHz carrier</span>
+          <span class="result-pill blue">Bluetooth fault feedback</span>
+          <span class="result-pill red">Fully analog implant</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Key Specifications</div>
+        <div class="specs-mini">
+          <div class="spec-row"><span class="spec-key">Carrier frequency</span><span class="spec-val">215 kHz</span></div>
+          <div class="spec-row"><span class="spec-key">Output voltage</span><span class="spec-val">2.5V DC</span></div>
+          <div class="spec-row"><span class="spec-key">Output power</span><span class="spec-val">94 mW</span></div>
+          <div class="spec-row"><span class="spec-key">Implant power</span><span class="spec-val">26 mW</span></div>
+          <div class="spec-row"><span class="spec-key">Telemetry BW</span><span class="spec-val">10–80 kHz sidebands</span></div>
+          <div class="spec-row"><span class="spec-key">Max operating depth</span><span class="spec-val">15 mm</span></div>
+          <div class="spec-row"><span class="spec-key">Implant architecture</span><span class="spec-val">Fully analog</span></div>
+          <div class="spec-row"><span class="spec-key">Comms (reader)</span><span class="spec-val">UART / SPI / BT</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">System Architecture</div>
+        <div class="img-placeholder">
+          RepHlux block diagram / poster image — add rephlux_poster.png to root
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /rephlux -->
+
+
+  <!-- ══════════════════════════════════════════════
+       PROJECT 3 — CHORDINATES
+       ══════════════════════════════════════════════ -->
+  <div class="project" id="chordinates" data-tags="embedded rf competition">
+
+    <div class="proj-sidebar">
+      <div class="proj-number">03 / 04</div>
+      <div class="proj-title">Chordinates</div>
+      <div class="proj-org">E-SONIC Competition</div>
+      <div class="proj-date">Dec 2025 – Apr 2026</div>
+      <div class="proj-tag-list">
+        <span class="proj-tag">UWB / DWM3000</span>
+        <span class="proj-tag">ESP32</span>
+        <span class="proj-tag">DS-TWR</span>
+        <span class="proj-tag">Max/MSP</span>
+        <span class="proj-tag">Kalman Filter</span>
+      </div>
+    </div>
+
+    <div class="proj-content">
+
+      <div>
+        <div class="proj-section-label">Overview</div>
+        <p class="proj-summary">
+          Chordinates is a <strong>novel musical instrument</strong> that maps real-time 3D position data — captured via ultra-wideband ranging — to synthesis parameters in Max/MSP. Four fixed UWB anchors and two mobile tags provide continuous XYZ coordinates at ~100 ms latency.
+        </p>
+        <p class="proj-summary" style="margin-top:12px;">
+          Firmware implements <strong>DS-TWR (double-sided two-way ranging)</strong> on DWM3000 modules driven by ESP32, with Kalman filtering to smooth position estimates. XYZ coordinates are mapped to pitch, spatialization, and modulation. Selected as a <strong>top-8 E-SONIC proposal</strong> and awarded $1,500 in development funding.
+        </p>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Results</div>
+        <div class="result-row">
+          <span class="result-pill gold">~10 cm accuracy</span>
+          <span class="result-pill blue">~100 ms latency</span>
+          <span class="result-pill red">$1,500 funded</span>
+          <span class="result-pill gold">Top-8 E-SONIC proposal</span>
+          <span class="result-pill blue">10–50 m NLOS range</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Key Specifications</div>
+        <div class="specs-mini">
+          <div class="spec-row"><span class="spec-key">Positioning accuracy</span><span class="spec-val">~10 cm</span></div>
+          <div class="spec-row"><span class="spec-key">Update latency</span><span class="spec-val">~100 ms</span></div>
+          <div class="spec-row"><span class="spec-key">NLOS range</span><span class="spec-val">10–50 m</span></div>
+          <div class="spec-row"><span class="spec-key">Open-space range</span><span class="spec-val">up to 100 m</span></div>
+          <div class="spec-row"><span class="spec-key">Ranging protocol</span><span class="spec-val">DS-TWR</span></div>
+          <div class="spec-row"><span class="spec-key">UWB IC</span><span class="spec-val">DWM3000 + ESP32</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /chordinates -->
+
+
+  <!-- ══════════════════════════════════════════════
+       PROJECT 4 — TUBE FURNACE
+       ══════════════════════════════════════════════ -->
+  <div class="project" id="furnace" data-tags="pcb embedded">
+
+    <div class="proj-sidebar">
+      <div class="proj-number">04 / 04</div>
+      <div class="proj-title">1200°C Tube Furnace</div>
+      <div class="proj-org">Hacker Fab / UCI</div>
+      <div class="proj-date">Sep 2024 – Jun 2025</div>
+      <div class="proj-tag-list">
+        <span class="proj-tag">ATmega8A</span>
+        <span class="proj-tag">PID Control</span>
+        <span class="proj-tag">HV Isolation</span>
+        <span class="proj-tag">KiCad</span>
+        <span class="proj-tag">Thermocouple</span>
+      </div>
+    </div>
+
+    <div class="proj-content">
+
+      <div>
+        <div class="proj-section-label">Overview</div>
+        <p class="proj-summary">
+          A <strong>low-cost programmable alumina-tube furnace</strong> for semiconductor oxidation, built to give students access to fabrication-grade thermal processing without commercial equipment costs. The furnace reaches 1200°C with PID-controlled temperature ramp and hold.
+        </p>
+        <p class="proj-summary" style="margin-top:12px;">
+          A custom PCB uses an <strong>ATmega8A MCU</strong> with thermocouple feedback to drive a high-voltage heating element through a solid-state relay. HV isolation is achieved with an alumina ceramic tube, SSR, and high-current fuse. Verified silicon wafer oxidation was confirmed under microscope. Delivered under <strong>$500 versus $3,000+ commercial alternatives</strong>.
+        </p>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Results</div>
+        <div class="result-row">
+          <span class="result-pill gold">±2°C accuracy to 1200°C</span>
+          <span class="result-pill red">20°C/min ramp rate</span>
+          <span class="result-pill blue">&lt;$500 total cost</span>
+          <span class="result-pill gold">Wafer oxidation verified</span>
+          <span class="result-pill red">HV isolated SSR drive</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="proj-section-label">Key Specifications</div>
+        <div class="specs-mini">
+          <div class="spec-row"><span class="spec-key">Max temperature</span><span class="spec-val">1200°C</span></div>
+          <div class="spec-row"><span class="spec-key">Temp accuracy</span><span class="spec-val">±2°C</span></div>
+          <div class="spec-row"><span class="spec-key">Ramp rate</span><span class="spec-val">20°C/min</span></div>
+          <div class="spec-row"><span class="spec-key">Control</span><span class="spec-val">PID, ATmega8A</span></div>
+          <div class="spec-row"><span class="spec-key">HV switching</span><span class="spec-val">Solid-state relay</span></div>
+          <div class="spec-row"><span class="spec-key">Total cost</span><span class="spec-val">&lt;$500</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /furnace -->
+
+</div><!-- /projects-list -->
+
+<footer>
+  <span>Lucas Kang · EE &amp; Music · UC Irvine</span>
+  <span>lucasjk2004.github.io/lucasjk-portfolio</span>
+</footer>
+
+<script>
+function filterProjects(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project').forEach(p => {
+    if (tag === 'all' || p.dataset.tags.includes(tag)) {
+      p.style.display = 'grid';
+    } else {
+      p.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
